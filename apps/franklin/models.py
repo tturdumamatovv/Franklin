@@ -19,6 +19,13 @@ class SingletonModel(models.Model):
         return cls.objects.get()
 
 
+class SortableModel(models.Model):
+    sort_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    class Meta:
+        ordering = ['sort_order']
+
+
 class HomePage(SingletonModel):
     pass
 
@@ -31,7 +38,7 @@ class AboutPage(SingletonModel):
         return self.title
 
 
-class TextSlider(models.Model):
+class TextSlider(SortableModel):
     CHOOSE_DURATION = (
         (1, "Left"),
         (2, "Right")
@@ -41,33 +48,38 @@ class TextSlider(models.Model):
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'), null=True, blank=True)
     text = RichTextField(verbose_name=_('Описание'))
     duration = models.CharField(max_length=100, choices=CHOOSE_DURATION)
+    page = models.ForeignKey(AboutPage, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
 
 
-class SliderItem(models.Model):
+class SliderItem(SortableModel):
     image = models.ImageField(upload_to='sliders/')
     text_slider = models.ForeignKey(TextSlider, on_delete=models.CASCADE)
 
 
-class BlockIcons(models.Model):
+
+class BlockIcons(SortableModel):
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
+    page = models.ForeignKey(AboutPage, on_delete=models.PROTECT)
 
 
-class BLockIconsIcon(models.Model):
+
+class BLockIconsIcon(SortableModel):
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
     text = models.CharField(max_length=100, verbose_name=_('Описание'))
     image = models.ImageField(upload_to='icons/')
     block = models.ForeignKey(BlockIcons, on_delete=models.CASCADE)
 
 
-class BlockImages(models.Model):
+class BlockImages(SortableModel):
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
     sub_title = models.CharField(max_length=100, verbose_name=_('Подзаголовок'))
+    page = models.ForeignKey(AboutPage, on_delete=models.PROTECT)
 
 
-class BlockImagesImage(models.Model):
+class BlockImagesImage(SortableModel):
     image = models.ImageField(upload_to='images/')
     block = models.ForeignKey(BlockImages, on_delete=models.CASCADE)
 
