@@ -58,7 +58,7 @@ class BlockIcons(models.Model):
 class BLockIconsIcon(models.Model):
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
     text = models.CharField(max_length=100, verbose_name=_('Описание'))
-    image = models.ImageField(upload_to='icons/')
+    image = models.ImageField(upload_to='block_icons/')
     block = models.ForeignKey(BlockIcons, on_delete=models.CASCADE)
 
 
@@ -68,12 +68,22 @@ class BlockImages(models.Model):
 
 
 class BlockImagesImage(models.Model):
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='block_images/')
     block = models.ForeignKey(BlockImages, on_delete=models.CASCADE)
 
 
 class PortfolioPage(SingletonModel):
     pass
+
+
+class PortfolioDuration(models.Model):
+    image = models.ImageField(upload_to='portfolio_images')
+    title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
+    portfolio = models.ForeignKey
+
+
+class PortfolioProject(models.Model):
+    title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
 
 
 class ServicePage(SingletonModel):
