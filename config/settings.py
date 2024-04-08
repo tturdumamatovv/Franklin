@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'nested_admin',
     'adminsortable2',
+    'polymorphic',
 
     # Created
     'apps.franklin',

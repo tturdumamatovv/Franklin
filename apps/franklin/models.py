@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from ckeditor.fields import RichTextField
+from polymorphic.models import PolymorphicModel
+
 
 
 class SingletonModel(models.Model):
-
     class Meta:
         abstract = True
 
@@ -19,13 +20,6 @@ class SingletonModel(models.Model):
         return cls.objects.get()
 
 
-class SortableModel(models.Model):
-    sort_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
-
-    class Meta:
-        ordering = ['sort_order']
-
-
 class HomePage(SingletonModel):
     pass
 
@@ -38,7 +32,19 @@ class AboutPage(SingletonModel):
         return self.title
 
 
-class TextSlider(SortableModel):
+class SortableModel(models.Model):
+    sort_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+
+    class Meta:
+        ordering = ['sort_order']
+
+
+class BasicAboutBlock(PolymorphicModel, SortableModel):
+    about_page = models.ForeignKey(AboutPage, on_delete=models.CASCADE)
+
+
+class TextSlider(BasicAboutBlock):
     CHOOSE_DURATION = (
         (1, "Left"),
         (2, "Right")
@@ -48,7 +54,6 @@ class TextSlider(SortableModel):
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'), null=True, blank=True)
     text = RichTextField(verbose_name=_('Описание'))
     duration = models.CharField(max_length=100, choices=CHOOSE_DURATION)
-    page = models.ForeignKey(AboutPage, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -59,11 +64,8 @@ class SliderItem(SortableModel):
     text_slider = models.ForeignKey(TextSlider, on_delete=models.CASCADE)
 
 
-
-class BlockIcons(SortableModel):
+class BlockIcons(BasicAboutBlock):
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
-    page = models.ForeignKey(AboutPage, on_delete=models.PROTECT)
-
 
 
 class BLockIconsIcon(SortableModel):
@@ -73,13 +75,12 @@ class BLockIconsIcon(SortableModel):
     block = models.ForeignKey(BlockIcons, on_delete=models.CASCADE)
 
 
-class BlockImages(SortableModel):
+class BlockImages(BasicAboutBlock):
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
     sub_title = models.CharField(max_length=100, verbose_name=_('Подзаголовок'))
-    page = models.ForeignKey(AboutPage, on_delete=models.PROTECT)
 
 
-class BlockImagesImage(models.Model):
+class BlockImagesImage(SortableModel):
     image = models.ImageField(upload_to='block_images/')
     block = models.ForeignKey(BlockImages, on_delete=models.CASCADE)
 
@@ -91,7 +92,7 @@ class PortfolioPage(SingletonModel):
 class PortfolioDuration(models.Model):
     image = models.ImageField(upload_to='portfolio_images')
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
-    portfolio = models.ForeignKey
+    # portfolio = models.ForeignKey()
 
 
 class PortfolioProject(models.Model):
