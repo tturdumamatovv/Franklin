@@ -152,3 +152,4 @@ class Image(models.Model):
         verbose_name = _('Картинка')
         verbose_name_plural = _('Картинки')
 
+

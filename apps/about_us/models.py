@@ -38,7 +38,8 @@ class AboutPage(SingletonModel):
 
 
 class ContentBlock(PolymorphicModel):
-    page = models.ForeignKey(AboutPage, on_delete=models.CASCADE, related_name='content_blocks', verbose_name=_('Страница'))
+    page = models.ForeignKey(AboutPage, on_delete=models.CASCADE, related_name='content_blocks',
+                             verbose_name=_('Страница'))
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
     title = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Заголовок'))
     description = RichTextField(blank=True, null=True, verbose_name=_('Описание'))

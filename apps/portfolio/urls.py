@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('portfolio-page/', views.PortfolioPageListView.as_view(), name='portfolio-page-list'),
-    path('portfolio-project/', views.PortfolioProjectListView.as_view(), name='portfolio-project-list'),
+    path('portfolio-projects/', views.PortfolioProjectListView.as_view(), name='portfolio-projects'),
+    path('portfolio-project/<int:id>/', views.PortfolioProjectDetailView.as_view(), name='portfolio-project-detail'),
     path('portfolio-duration/', views.PortfolioDurationListView.as_view(), name='portfolio-duration-list'),
 ]
