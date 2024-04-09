@@ -64,7 +64,7 @@ class ImagesBlock(ContentBlock):
 
 
 class Image(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(upload_to='about_page')
     block = models.ForeignKey(ImagesBlock, on_delete=models.CASCADE, related_name='images')
 
     class Meta:
@@ -83,8 +83,8 @@ class SliderBlock(ContentBlock):
 
 
 class Slide(models.Model):
-    image = models.ImageField()
-    block = models.ForeignKey(SliderBlock, on_delete=models.CASCADE, related_name='categories')
+    image = models.ImageField(upload_to='about_slide')
+    block = models.ForeignKey(SliderBlock, on_delete=models.CASCADE, related_name='slides')
 
     class Meta:
         verbose_name = _('Слайд')
@@ -111,4 +111,3 @@ class Icon(models.Model):
         ordering = ['order']
         verbose_name = _('Иконка')
         verbose_name_plural = _('Иконки')
-
