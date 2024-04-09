@@ -103,8 +103,11 @@ class Icon(models.Model):
     image = models.ImageField()
     title = models.CharField(max_length=30)
     sub_title = models.CharField(max_length=50)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
     block = models.ForeignKey(IconsBlock, on_delete=models.CASCADE, related_name='icons')
 
     class Meta:
+        ordering = ['order']
         verbose_name = _('Иконка')
         verbose_name_plural = _('Иконки')
+

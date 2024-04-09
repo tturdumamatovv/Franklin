@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     # Created
     'apps.about_us',
     'apps.portfolio',
+    'apps.services',
+    'apps.contacts'
 ]
 
 MIDDLEWARE = [
