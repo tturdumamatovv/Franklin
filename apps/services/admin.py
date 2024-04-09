@@ -7,11 +7,12 @@ from polymorphic.admin import (
     PolymorphicChildModelAdmin
 )
 
-from .models import AboutPage, ContentBlock, ImagesBlock, SliderBlock, Image, Slide, Icon, IconsBlock
+from .models import (ServicePage, ContentBlock, ServiceImage, SliderBlock, Service, Slide, Icon, IconsBlock,
+                     AboutServiceImage, AboutService, Step, StepBlock)
 
 
 class ImageInline(StackedInline):
-    model = Image
+    model = ServiceImage
 
 
 class SlideInline(StackedInline):
@@ -34,8 +35,8 @@ class IconsBlockAdmin(PolymorphicChildModelAdmin):
     inlines = [IconsInline, ]
 
 
-class ImageBlockInline(StackedPolymorphicInline.Child):
-    model = ImagesBlock
+class AboutBlockInline(StackedPolymorphicInline.Child):
+    model = AboutService
 
 
 class SliderBlockInline(StackedPolymorphicInline.Child):
@@ -49,7 +50,7 @@ class IconsBlockInline(StackedPolymorphicInline.Child):
 class ContentBlockInline(StackedPolymorphicInline):
     model = ContentBlock
     child_inlines = (
-        ImageBlockInline,
+        AboutBlockInline,
         SliderBlockInline,
         IconsBlockInline,
     )
@@ -69,4 +70,3 @@ admin.site.register(ContentBlock, ContentBlockAdmin)
 admin.site.register(ImagesBlock, ImagesBlockAdmin)
 admin.site.register(SliderBlock, SliderBlockAdmin)
 admin.site.register(IconsBlock, IconsBlockAdmin)
-
