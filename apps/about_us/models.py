@@ -13,16 +13,26 @@ class SingletonModel(models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-        # Если модель уже существует, удалите ее
-        self.__class__.objects.exclude(id=self.id).delete()
-        super(SingletonModel, self).save(*args, **kwargs)
+        if self.__class__.objects.exists():  # Проверяем, существует ли экземпляр
+            # Получаем существующий экземпляр
+            existing_instance = self.__class__.objects.get()
+            # Если мы не работаем с уже существующим экземпляром
+            if self.id != existing_instance.id:
+                # Обновляем существующий экземпляр полями из текущего экземпляра
+                for field in self._meta.fields:
+                    if field.name != "id":  # Пропускаем поле id
+                        setattr(existing_instance, field.name, getattr(self, field.name))
+                existing_instance.save(*args, **kwargs)  # Сохраняем существующий экземпляр
+        else:
+            # Если экземпляр не существует, просто сохраняем текущий
+            super(SingletonModel, self).save(*args, **kwargs)
 
     @classmethod
     def load(cls):
-        # Если модель еще не существует, создайте ее
         if not cls.objects.exists():
             cls.objects.create()
         return cls.objects.get()
+
 
 
 class AboutPage(SingletonModel):

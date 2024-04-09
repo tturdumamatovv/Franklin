@@ -3,35 +3,7 @@ from django.db import models
 from polymorphic.models import PolymorphicModel
 from django.utils.translation import gettext_lazy as _
 
-
-class SingletonModel(models.Model):
-    """
-    Модель, которая всегда имеет только один экземпляр.
-    """
-
-    class Meta:
-        abstract = True
-
-    def save(self, *args, **kwargs):
-        if self.__class__.objects.exists():  # Проверяем, существует ли экземпляр
-            # Получаем существующий экземпляр
-            existing_instance = self.__class__.objects.get()
-            # Если мы не работаем с уже существующим экземпляром
-            if self.id != existing_instance.id:
-                # Обновляем существующий экземпляр полями из текущего экземпляра
-                for field in self._meta.fields:
-                    if field.name != "id":  # Пропускаем поле id
-                        setattr(existing_instance, field.name, getattr(self, field.name))
-                existing_instance.save(*args, **kwargs)  # Сохраняем существующий экземпляр
-        else:
-            # Если экземпляр не существует, просто сохраняем текущий
-            super(SingletonModel, self).save(*args, **kwargs)
-
-    @classmethod
-    def load(cls):
-        if not cls.objects.exists():
-            cls.objects.create()
-        return cls.objects.get()
+from apps.about_us.models import SingletonModel
 
 
 class ServicePage(SingletonModel):
