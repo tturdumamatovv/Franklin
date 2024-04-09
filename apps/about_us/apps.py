@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FranklinConfig(AppConfig):
+class AboutUsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.franklin'
+    name = 'apps.about_us'

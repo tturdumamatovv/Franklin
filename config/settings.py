@@ -43,10 +43,9 @@ INSTALLED_APPS = [
     'nested_admin',
     'adminsortable2',
     'polymorphic',
-
     # Created
-    'apps.franklin',
-
+    'apps.about_us',
+    'apps.portfoleo',
 ]
 
 MIDDLEWARE = [
