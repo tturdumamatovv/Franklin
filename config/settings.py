@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'nested_admin',
     'adminsortable2',
     'polymorphic',
+    'rest_framework',
     # Created
     'apps.about_us',
     'apps.portfolio',

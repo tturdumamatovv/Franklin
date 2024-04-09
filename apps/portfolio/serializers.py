@@ -26,9 +26,25 @@ class PortfolioImageSerializer(serializers.ModelSerializer):
         fields = ('image', )
 
 
+class PortfolioDurationForProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PortfolioDuration
+        fields = ('name',)
+
+
 class PortfolioProjectSerializer(serializers.ModelSerializer):
-    image = PortfolioImageSerializer()
+    images = PortfolioImageSerializer(many=True, read_only=True)
+    duration = PortfolioDurationForProjectSerializer()
 
     class Meta:
         model = PortfolioProject
-        fields = ('title', 'description', 'location', 'image')
+        fields = ('title', 'description', 'location', 'images', 'duration')
+
+
+class PortfolioProjectListSerializer(serializers.ModelSerializer):
+    images = PortfolioImageSerializer(many=True, read_only=True)
+    duration = PortfolioDurationForProjectSerializer()
+
+    class Meta:
+        model = PortfolioProject
+        fields = ('id', 'images', 'duration')
