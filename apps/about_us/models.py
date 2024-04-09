@@ -1,30 +1,23 @@
-from ckeditor.fields import RichTextField
 from django.db import models
-from polymorphic.models import PolymorphicModel
 from django.utils.translation import gettext_lazy as _
+
+from ckeditor.fields import RichTextField
+from polymorphic.models import PolymorphicModel
 
 
 class SingletonModel(models.Model):
-    """
-    Модель, которая всегда имеет только один экземпляр.
-    """
-
     class Meta:
         abstract = True
 
     def save(self, *args, **kwargs):
-        if self.__class__.objects.exists():  # Проверяем, существует ли экземпляр
-            # Получаем существующий экземпляр
+        if self.__class__.objects.exists():
             existing_instance = self.__class__.objects.get()
-            # Если мы не работаем с уже существующим экземпляром
             if self.id != existing_instance.id:
-                # Обновляем существующий экземпляр полями из текущего экземпляра
                 for field in self._meta.fields:
-                    if field.name != "id":  # Пропускаем поле id
+                    if field.name != "id":
                         setattr(existing_instance, field.name, getattr(self, field.name))
-                existing_instance.save(*args, **kwargs)  # Сохраняем существующий экземпляр
+                existing_instance.save(*args, **kwargs)
         else:
-            # Если экземпляр не существует, просто сохраняем текущий
             super(SingletonModel, self).save(*args, **kwargs)
 
     @classmethod
@@ -34,10 +27,9 @@ class SingletonModel(models.Model):
         return cls.objects.get()
 
 
-
 class AboutPage(SingletonModel):
     title = models.CharField(max_length=200, verbose_name=_('Заголовок'))
-    sub_title = models.CharField(max_length=200, verbose_name=_('Заголовок'))
+    sub_title = models.CharField(max_length=200, verbose_name=_('Подзаголовок'))
 
     class Meta:
         verbose_name = _('Страница "О Нас"')
@@ -111,7 +103,7 @@ class IconsBlock(ContentBlock):
 
 
 class Icon(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(upload_to='icons/')
     title = models.CharField(max_length=30)
     sub_title = models.CharField(max_length=50)
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))

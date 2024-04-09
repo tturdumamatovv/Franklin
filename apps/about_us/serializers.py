@@ -1,5 +1,14 @@
 from rest_framework import serializers
-from .models import AboutPage, ImagesBlock, Image, SliderBlock, Slide, IconsBlock, Icon
+
+from .models import (
+    AboutPage,
+    ImagesBlock,
+    Image,
+    SliderBlock,
+    Slide,
+    IconsBlock,
+    Icon
+)
 
 
 class ImageSerializer(serializers.ModelSerializer):
