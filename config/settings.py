@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'polymorphic',
     # Created
     'apps.about_us',
+    'apps.portfolio',
 ]
 
 MIDDLEWARE = [
