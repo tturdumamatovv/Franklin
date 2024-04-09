@@ -5,28 +5,31 @@ from apps.about_us.models import SingletonModel
 
 
 class PortfolioPage(SingletonModel):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
+    title = models.CharField(max_length=200, verbose_name=_('Загловок'))
+    content = models.TextField(verbose_name=_('Контент'))
 
     def __str__(self):
         return self.title
+
 
 class PortfolioDuration(models.Model):
     page = models.ForeignKey(PortfolioPage, related_name='durations', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='portfolio_duration/')
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, verbose_name=_('Название'))
 
     def __str__(self):
         return self.name
 
+
 class PortfolioProject(models.Model):
     duration = models.ForeignKey(PortfolioDuration, related_name='projects', on_delete=models.CASCADE)
-    title = models.CharField(max_length=150)
-    description = models.TextField()
-    location = models.CharField(max_length=150)
+    title = models.CharField(max_length=150, verbose_name=_('Описание'))
+    description = models.TextField(verbose_name=_('Описание'))
+    location = models.CharField(max_length=150, verbose_name=_('Локация'))
 
     def __str__(self):
         return self.title
+
 
 class PortfolioImage(models.Model):
     project = models.ForeignKey(PortfolioProject, related_name='images', on_delete=models.CASCADE)

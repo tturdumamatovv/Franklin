@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import StackedInline
+
 from polymorphic.admin import (
     PolymorphicInlineSupportMixin,
     StackedPolymorphicInline,
@@ -7,7 +8,16 @@ from polymorphic.admin import (
     PolymorphicChildModelAdmin
 )
 
-from .models import AboutPage, ContentBlock, ImagesBlock, SliderBlock, Image, Slide, Icon, IconsBlock
+from .models import (
+    AboutPage,
+    ContentBlock,
+    ImagesBlock,
+    SliderBlock,
+    Image,
+    Slide,
+    Icon,
+    IconsBlock
+)
 
 
 class ImageInline(StackedInline):

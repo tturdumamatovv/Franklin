@@ -7,7 +7,7 @@ from apps.about_us.models import SingletonModel
 
 
 class ServicePage(SingletonModel):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, verbose_name=_('Название'))
 
     class Meta:
         verbose_name = _('Страница "Услуги"')
@@ -43,9 +43,9 @@ class IconsBlock(ContentBlock):
 
 
 class Icon(models.Model):
-    image = models.ImageField()
-    title = models.CharField(max_length=30)
-    sub_title = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='icon/', verbose_name=_('Изображение'))
+    title = models.CharField(max_length=30, verbose_name=_('Заголовок'))
+    sub_title = models.CharField(max_length=50, verbose_name=_('Подзаголовок'))
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
     block = models.ForeignKey(IconsBlock, on_delete=models.CASCADE, related_name='icons')
 
@@ -66,7 +66,7 @@ class SliderBlock(ContentBlock):
 
 
 class Slide(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(upload_to='slide/', verbose_name=_('Изображение'))
     block = models.ForeignKey(SliderBlock, on_delete=models.CASCADE, related_name='slides')
 
     class Meta:
@@ -75,7 +75,7 @@ class Slide(models.Model):
 
 
 class StepBlock(ContentBlock):
-    sub_title = models.CharField(max_length=150)
+    sub_title = models.CharField(max_length=150, verbose_name=_('Подзаголовок'))
 
     def __str__(self):
         return self.title
@@ -86,9 +86,9 @@ class StepBlock(ContentBlock):
 
 
 class Step(models.Model):
-    image = models.ImageField()
-    title = models.CharField(max_length=150)
-    description = models.TextField()
+    image = models.ImageField(upload_to='step/', verbose_name=_('Изображение'))
+    title = models.CharField(max_length=150, verbose_name=_('Заголовок'))
+    description = models.TextField(verbose_name=_('Описание'))
     block = models.ForeignKey(StepBlock, on_delete=models.CASCADE, related_name='steps')
 
     class Meta:
@@ -97,16 +97,16 @@ class Step(models.Model):
 
 
 class AboutService(ContentBlock):
-    sub_title = models.CharField(max_length=150)
-    sub_sub_title = models.CharField(max_length=150)
-    bonus = models.CharField(max_length=150)
+    sub_title = models.CharField(max_length=150, verbose_name=_('Подзаголовок'))
+    sub_sub_title = models.CharField(max_length=150, verbose_name=_('Под-подзаголовок'))
+    bonus = models.CharField(max_length=150, verbose_name=_('Бонус'))
 
     def __str__(self):
         return self.title
 
 
 class AboutServiceImage(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(upload_to='about_services/', verbose_name=_('Изображение'))
     block = models.ForeignKey(AboutService, on_delete=models.CASCADE, related_name='images')
 
 
@@ -117,11 +117,9 @@ class ImagesBlock(ContentBlock):
 
 
 class Image(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(upload_to='services/', verbose_name=_('Изображение'))
     block = models.ForeignKey(ImagesBlock, on_delete=models.CASCADE, related_name='images')
 
     class Meta:
         verbose_name = _('Картинка')
         verbose_name_plural = _('Картинки')
-
-
