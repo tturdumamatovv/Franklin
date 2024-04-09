@@ -5,7 +5,7 @@ class PortfolioPage(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
 
-    def __str__(self):
+    def str(self):
         return self.title
 
 
@@ -23,6 +23,3 @@ class PortfolioProject(models.Model):
 class PortfolioImage(models.Model):
     image = models.ImageField(upload_to='portfolio_projects/')
     project = models.ForeignKey(PortfolioProject, on_delete=models.CASCADE)
-
-
-

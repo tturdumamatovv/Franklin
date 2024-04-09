@@ -4,20 +4,45 @@ from polymorphic.models import PolymorphicModel
 from django.utils.translation import gettext_lazy as _
 
 
-class ServicePage(models.Model):
+class SingletonModel(models.Model):
+    """
+    Модель, которая всегда имеет только один экземпляр.
+    """
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if self.__class__.objects.exists():  # Проверяем, существует ли экземпляр
+            # Получаем существующий экземпляр
+            existing_instance = self.__class__.objects.get()
+            # Если мы не работаем с уже существующим экземпляром
+            if self.id != existing_instance.id:
+                # Обновляем существующий экземпляр полями из текущего экземпляра
+                for field in self._meta.fields:
+                    if field.name != "id":  # Пропускаем поле id
+                        setattr(existing_instance, field.name, getattr(self, field.name))
+                existing_instance.save(*args, **kwargs)  # Сохраняем существующий экземпляр
+        else:
+            # Если экземпляр не существует, просто сохраняем текущий
+            super(SingletonModel, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        if not cls.objects.exists():
+            cls.objects.create()
+        return cls.objects.get()
+
+
+class ServicePage(SingletonModel):
     name = models.CharField(max_length=150)
 
+    class Meta:
+        verbose_name = _('Страница "Услуги"')
+        verbose_name_plural = _('Страница "Услуги"')
 
-class Service(models.Model):
-    title = models.CharField(max_length=150)
-    sub_title = models.CharField(max_length=150)
-    description = models.TextField(null=True, blank=True)
-    service_page = models.ForeignKey(ServicePage, on_delete=models.PROTECT)
-
-
-class ServiceImage(models.Model):
-    image = models.ImageField(upload_to='services/')
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
 
 class ContentBlock(PolymorphicModel):
@@ -31,6 +56,9 @@ class ContentBlock(PolymorphicModel):
         ordering = ['order']
         verbose_name = _('Блок')
         verbose_name_plural = _('Блоки')
+
+    def __str__(self):
+        return self.title
 
 
 class IconsBlock(ContentBlock):
@@ -67,7 +95,7 @@ class SliderBlock(ContentBlock):
 
 class Slide(models.Model):
     image = models.ImageField()
-    block = models.ForeignKey(SliderBlock, on_delete=models.CASCADE, related_name='categories')
+    block = models.ForeignKey(SliderBlock, on_delete=models.CASCADE, related_name='slides')
 
     class Meta:
         verbose_name = _('Слайд')
@@ -89,7 +117,7 @@ class Step(models.Model):
     image = models.ImageField()
     title = models.CharField(max_length=150)
     description = models.TextField()
-    block = models.ForeignKey(SliderBlock, on_delete=models.CASCADE, related_name='categories')
+    block = models.ForeignKey(StepBlock, on_delete=models.CASCADE, related_name='steps')
 
     class Meta:
         verbose_name = _('Слайд')
@@ -104,15 +132,23 @@ class AboutService(ContentBlock):
     def __str__(self):
         return self.title
 
-    class Meta:
-        verbose_name = _('Блок с картинками')
-        verbose_name_plural = _('Блоки с картинками')
-
 
 class AboutServiceImage(models.Model):
     image = models.ImageField()
     block = models.ForeignKey(AboutService, on_delete=models.CASCADE, related_name='images')
 
+
+class ImagesBlock(ContentBlock):
+
+    def __str__(self):
+        return self.title
+
+
+class Image(models.Model):
+    image = models.ImageField()
+    block = models.ForeignKey(ImagesBlock, on_delete=models.CASCADE, related_name='images')
+
     class Meta:
         verbose_name = _('Картинка')
         verbose_name_plural = _('Картинки')
+

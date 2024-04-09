@@ -1,11 +1,6 @@
 from django.contrib import admin
 
-from .models import (
-    PortfolioPage,
-    PortfolioDuration,
-    PortfolioProject,
-    PortfolioImage
-)
+from apps.portfolio.models import PortfolioPage, PortfolioDuration, PortfolioProject, PortfolioImage
 
 
 admin.site.register(PortfolioPage)
