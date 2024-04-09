@@ -123,3 +123,14 @@ class Image(models.Model):
     class Meta:
         verbose_name = _('Картинка')
         verbose_name_plural = _('Картинки')
+
+
+class Diagram(ContentBlock):
+    first_field = models.CharField(max_length=150, verbose_name=_('Первое поле'))
+    second_field = models.CharField(max_length=150, verbose_name=_('Второе поле'))
+    third_field = models.CharField(max_length=150, verbose_name=_('Треье поле'))
+    result_field = models.CharField(max_length=150, verbose_name=_('Результат'))
+
+    class Meta:
+        verbose_name = _('Диаграмма')
+        verbose_name_plural = _('Диаграммы')

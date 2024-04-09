@@ -20,7 +20,8 @@ from .models import (
     Step,
     AboutServiceImage,
     Image,
-    ImagesBlock
+    ImagesBlock,
+    Diagram
 )
 
 
@@ -56,6 +57,10 @@ class IconsBlockAdmin(PolymorphicChildModelAdmin):
     inlines = [IconsInline, ]
 
 
+class DiagramBlockAdmin(PolymorphicChildModelAdmin):
+    pass
+
+
 class AboutServiceAdmin(PolymorphicChildModelAdmin):
     inlines = [AboutServiceImageInline, ]
 
@@ -84,6 +89,10 @@ class StepBlockInline(StackedPolymorphicInline.Child):
     model = StepBlock
 
 
+class DiagramBlockInline(StackedPolymorphicInline.Child):
+    model = Diagram
+
+
 class ContentBlockInline(StackedPolymorphicInline):
     model = ContentBlock
     child_inlines = (
@@ -92,6 +101,7 @@ class ContentBlockInline(StackedPolymorphicInline):
         IconsBlockInline,
         AboutServiceInline,
         StepBlockInline,
+        DiagramBlockInline
     )
 
 
@@ -101,7 +111,7 @@ class ServicePageAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
 
 class ContentBlockAdmin(PolymorphicParentModelAdmin):
     base_model = ContentBlock
-    child_models = (ImagesBlock, SliderBlock, IconsBlock, AboutService, StepBlock)
+    child_models = (ImagesBlock, SliderBlock, IconsBlock, AboutService, StepBlock, Diagram)
 
 
 admin.site.register(ServicePage, ServicePageAdmin)
@@ -111,3 +121,4 @@ admin.site.register(SliderBlock, SliderBlockAdmin)
 admin.site.register(IconsBlock, IconsBlockAdmin)
 admin.site.register(AboutService, AboutServiceAdmin)
 admin.site.register(StepBlock, StepBlockAdmin)
+admin.site.register(Diagram, DiagramBlockAdmin)
