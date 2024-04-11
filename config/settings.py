@@ -223,15 +223,16 @@ SIMPLEUI_CONFIG = {
                 {
                     'name': 'Контакты',
                     'icon': 'fa fa-address-book',
-                    'url': '/admin/contacts/application/'
-                },
-                {
-                    'name': 'Заявки',
-                    'icon': 'fa fa-list',
-                    'url': '/admin/contacts/application/'
+                    'url': '/admin/contacts/contact/'
                 },
 
+
             ]
+        },
+        {
+            'name': 'Заявки',
+            'icon': 'fa fa-list',
+            'url': '/admin/contacts/application/'
         },
 
     ]
