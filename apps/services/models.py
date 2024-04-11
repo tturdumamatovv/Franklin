@@ -101,6 +101,9 @@ class AboutService(ContentBlock):
     sub_sub_title = models.CharField(max_length=150, verbose_name=_('Под-подзаголовок'))
     bonus = models.CharField(max_length=150, verbose_name=_('Бонус'))
 
+    class Meta:
+        verbose_name = 'О сервисе'
+
     def __str__(self):
         return self.title
 
@@ -114,6 +117,10 @@ class ImagesBlock(ContentBlock):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = _('Блок с картинками')
+        verbose_name_plural = _('Блок с картинками')
 
 
 class Image(models.Model):

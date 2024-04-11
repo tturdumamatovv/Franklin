@@ -107,6 +107,11 @@ class ContentBlockInline(StackedPolymorphicInline):
 
 class ServicePageAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
     inlines = [ContentBlockInline, ]
+    class Media:
+        css = {
+            "all": ("css/admin.css",)
+        }
+
 
 
 class ContentBlockAdmin(PolymorphicParentModelAdmin):
