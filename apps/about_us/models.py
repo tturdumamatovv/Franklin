@@ -56,6 +56,7 @@ class ContentBlock(PolymorphicModel):
 
 
 class ImagesBlock(ContentBlock):
+    type = 'images'
 
     def __str__(self):
         return self.title
@@ -75,6 +76,8 @@ class Image(models.Model):
 
 
 class SliderBlock(ContentBlock):
+    type = 'slider'
+    duration = models.CharField(max_length=100 ,choices=((1, 'right'), (2, 'left')))
 
     def __str__(self):
         return self.title
@@ -94,6 +97,8 @@ class Slide(models.Model):
 
 
 class IconsBlock(ContentBlock):
+    type = 'icons'
+
     class Meta:
         verbose_name = _('Блок с иконками')
         verbose_name_plural = _('Блоки с иконками')

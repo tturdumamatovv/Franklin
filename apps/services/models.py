@@ -34,6 +34,8 @@ class ContentBlock(PolymorphicModel):
 
 
 class IconsBlock(ContentBlock):
+    type = 'icons'
+
     class Meta:
         verbose_name = _('Блок с иконками')
         verbose_name_plural = _('Блоки с иконками')
@@ -56,6 +58,8 @@ class Icon(models.Model):
 
 
 class SliderBlock(ContentBlock):
+    duration = models.CharField(max_length=100, choices=((1, 'right'), (2, 'left')))
+    type = 'slider'
 
     def __str__(self):
         return self.title
@@ -76,6 +80,7 @@ class Slide(models.Model):
 
 class StepBlock(ContentBlock):
     sub_title = models.CharField(max_length=150, verbose_name=_('Подзаголовок'), blank=True, null=True)
+    type = 'steps'
 
     def __str__(self):
         return self.title
@@ -114,6 +119,7 @@ class AboutServiceImage(models.Model):
 
 
 class ImagesBlock(ContentBlock):
+    type = 'images'
 
     def __str__(self):
         return self.title
@@ -137,6 +143,7 @@ class Diagram(ContentBlock):
     second_field = models.CharField(max_length=150, verbose_name=_('Второе поле'))
     third_field = models.CharField(max_length=150, verbose_name=_('Треье поле'))
     result_field = models.CharField(max_length=150, verbose_name=_('Результат'))
+    type = 'diagram'
 
     class Meta:
         verbose_name = _('Диаграмма')
