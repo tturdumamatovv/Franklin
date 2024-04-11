@@ -6,7 +6,7 @@ from apps.about_us.models import SingletonModel
 
 class PortfolioPage(SingletonModel):
     title = models.CharField(max_length=200, verbose_name=_('Загловок'))
-    content = models.TextField(verbose_name=_('Контент'))
+    content = models.TextField(verbose_name=_('Контент'), blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -23,8 +23,8 @@ class PortfolioDuration(models.Model):
 
 class PortfolioProject(models.Model):
     duration = models.ForeignKey(PortfolioDuration, related_name='projects', on_delete=models.CASCADE)
-    title = models.CharField(max_length=150, verbose_name=_('Описание'))
-    description = models.TextField(verbose_name=_('Описание'))
+    title = models.CharField(max_length=150, verbose_name=_('Заголовок'))
+    description = models.TextField(verbose_name=_('Описание'), blank=True, null=True)
     location = models.CharField(max_length=150, verbose_name=_('Локация'))
 
     def __str__(self):

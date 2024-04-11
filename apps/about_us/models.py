@@ -29,7 +29,7 @@ class SingletonModel(models.Model):
 
 class AboutPage(SingletonModel):
     title = models.CharField(max_length=200, verbose_name=_('Заголовок'))
-    sub_title = models.CharField(max_length=200, verbose_name=_('Подзаголовок'))
+    sub_title = models.CharField(max_length=200, verbose_name=_('Подзаголовок'), blank=True, null=True)
 
     class Meta:
         verbose_name = _('Страница "О Нас"')
@@ -105,7 +105,7 @@ class IconsBlock(ContentBlock):
 class Icon(models.Model):
     image = models.ImageField(upload_to='icons/')
     title = models.CharField(max_length=30)
-    sub_title = models.CharField(max_length=50)
+    sub_title = models.CharField(max_length=50, blank=True, null=True)
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
     block = models.ForeignKey(IconsBlock, on_delete=models.CASCADE, related_name='icons')
 

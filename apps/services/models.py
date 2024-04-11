@@ -44,8 +44,8 @@ class IconsBlock(ContentBlock):
 
 class Icon(models.Model):
     image = models.ImageField(upload_to='icon/', verbose_name=_('Изображение'))
-    title = models.CharField(max_length=30, verbose_name=_('Заголовок'))
-    sub_title = models.CharField(max_length=50, verbose_name=_('Подзаголовок'))
+    title = models.CharField(max_length=30, verbose_name=_('Заголовок'), blank=True, null=True)
+    sub_title = models.CharField(max_length=50, verbose_name=_('Подзаголовок'), blank=True, null=True)
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
     block = models.ForeignKey(IconsBlock, on_delete=models.CASCADE, related_name='icons')
 
@@ -75,7 +75,7 @@ class Slide(models.Model):
 
 
 class StepBlock(ContentBlock):
-    sub_title = models.CharField(max_length=150, verbose_name=_('Подзаголовок'))
+    sub_title = models.CharField(max_length=150, verbose_name=_('Подзаголовок'), blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -86,9 +86,9 @@ class StepBlock(ContentBlock):
 
 
 class Step(models.Model):
-    image = models.ImageField(upload_to='step/', verbose_name=_('Изображение'))
-    title = models.CharField(max_length=150, verbose_name=_('Заголовок'))
-    description = models.TextField(verbose_name=_('Описание'))
+    image = models.ImageField(upload_to='step/', verbose_name=_('Изображение'), blank=True, null=True)
+    title = models.CharField(max_length=150, verbose_name=_('Заголовок'), blank=True, null=True)
+    description = models.TextField(verbose_name=_('Описание'), blank=True, null=True)
     block = models.ForeignKey(StepBlock, on_delete=models.CASCADE, related_name='steps')
 
     class Meta:

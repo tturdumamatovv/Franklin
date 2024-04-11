@@ -1,52 +1,43 @@
-import nested_admin
-
 from django.contrib import admin
-
-from .models import (
-    PortfolioPage,
-    PortfolioDuration,
-    PortfolioProject,
-    PortfolioImage
-)
+import nested_admin
+from .models import PortfolioPage, PortfolioDuration, PortfolioProject, PortfolioImage
 
 
-class PortfolioImageInline(nested_admin.NestedStackedInline):
-    model = PortfolioImage
+class BaseAdmin(nested_admin.NestedModelAdmin, admin.ModelAdmin):
+    class Media:
+        css = {
+            "all": ("css/admin.css",)
+        }
+
+
+class NestedBaseInline(nested_admin.NestedStackedInline):
     extra = 0
 
 
-class PortfolioProjectInline(nested_admin.NestedStackedInline):
+class PortfolioImageInline(NestedBaseInline):
+    model = PortfolioImage
+
+
+class PortfolioProjectInline(NestedBaseInline):
     model = PortfolioProject
     inlines = [PortfolioImageInline, ]
-    extra = 0
 
 
-class PortfolioDurationInline(nested_admin.NestedStackedInline):
+class PortfolioDurationInline(NestedBaseInline):
     model = PortfolioDuration
     inlines = [PortfolioProjectInline, ]
-    extra = 0
 
 
 @admin.register(PortfolioPage)
-class PortfolioPageAdmin(nested_admin.NestedModelAdmin):
+class PortfolioPageAdmin(BaseAdmin):
     inlines = [PortfolioDurationInline, ]
-
-    class Media:
-        css = {
-            "all": ("css/admin.css",)
-        }
 
 
 @admin.register(PortfolioDuration)
-class PortfolioDurationAdmin(admin.ModelAdmin):
+class PortfolioDurationAdmin(BaseAdmin):
     inlines = [PortfolioProjectInline, ]
-
-    class Media:
-        css = {
-            "all": ("css/admin.css",)
-        }
 
 
 @admin.register(PortfolioProject)
-class PortfolioProject(admin.ModelAdmin):
+class PortfolioProjectAdmin(BaseAdmin):
     inlines = [PortfolioImageInline, ]
