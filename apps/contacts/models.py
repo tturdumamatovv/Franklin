@@ -1,27 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-
-class SingletonModel(models.Model):
-    class Meta:
-        abstract = True
-
-    def save(self, *args, **kwargs):
-        if self.__class__.objects.exists():
-            existing_instance = self.__class__.objects.get()
-            if self.id != existing_instance.id:
-                for field in self._meta.fields:
-                    if field.name != "id":
-                        setattr(existing_instance, field.name, getattr(self, field.name))
-                existing_instance.save(*args, **kwargs)
-        else:
-            super(SingletonModel, self).save(*args, **kwargs)
-
-    @classmethod
-    def load(cls):
-        if not cls.objects.exists():
-            cls.objects.create()
-        return cls.objects.get()
+from apps.about_us.models import SingletonModel
 
 
 class Contact(SingletonModel):

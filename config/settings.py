@@ -155,7 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SIMPLEUI_HOME_INFO = False
 SIMPLEUI_HOME_ACTION = False
 SIMPLEUI_HOME_QUICK = True
-SIMPLEUI_DEFAULT_THEME = 'black.css'
+SIMPLEUI_DEFAULT_THEME = 'e-black-pro.css'
 SIMPLEUI_INDEX = '#'
 SIMPLEUI_LOGO = '/static/icons/LOGO.svg'
 SIMPLEUI_CONFIG = {
@@ -167,16 +167,16 @@ SIMPLEUI_CONFIG = {
             'models': [
                 {
                     'name': 'О нас',
-                    'icon': 'fa fa-user',
+                    'icon': 'fa fa-info-circle',
                     'models': [
                         {
                             'name': 'Страница',
-                            'icon': 'fa fa-user',
+                            'icon': 'fa fa-file-text',
                             'url': '/admin/about_us/aboutpage/'
                         },
                         {
                             'name': 'Блоки',
-                            'icon': 'fa fa-shopping-cart',
+                            'icon': 'fa fa-cubes',
                             'url': '/admin/about_us/contentblock/'
                         },
 
@@ -184,8 +184,24 @@ SIMPLEUI_CONFIG = {
                 },
                 {
                     'name': 'Портфолио',
-                    'icon': 'fa fa-user',
-                    'url': '/admin/portfolio/portfoliopage/'
+                    'icon': 'fa fa-folder',
+                    'models': [
+                        {
+                            'name': 'Страница',
+                            'icon': 'fa fa-file-text',
+                            'url': '/admin/portfolio/portfoliopage/'
+                        },
+                        {
+                            'name': 'Направление',
+                            'icon': 'fa fa-arrows',
+                            'url': '/admin/portfolio/portfolioduration/'
+                        },
+                        {
+                            'name': 'Проекты',
+                            'icon': 'fa fa-industry',
+                            'url': '/admin/portfolio/portfolioproject/'
+                        },
+                    ]
                 },
                 {
                     'name': 'Услуги',
@@ -193,12 +209,12 @@ SIMPLEUI_CONFIG = {
                     'models': [
                         {
                             'name': 'Страница',
-                            'icon': 'fa fa-user',
+                            'icon': 'fa fa-file-text',
                             'url': '/admin/services/servicepage/'
                         },
                         {
                             'name': 'Блоки',
-                            'icon': 'fa fa-shopping-cart',
+                            'icon': 'fa fa-cubes',
                             'url': '/admin/services/contentblock/'
                         },
 
@@ -206,7 +222,7 @@ SIMPLEUI_CONFIG = {
                 },
                 {
                     'name': 'Контакты',
-                    'icon': 'fa fa-money-bill',
+                    'icon': 'fa fa-address-book',
                     'url': '/admin/contacts/application/'
                 },
                 {
