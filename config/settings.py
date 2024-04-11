@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'apps.about_us',
     'apps.portfolio',
     'apps.services',
-    # 'apps.contacts'
+    'apps.contacts'
 ]
 
 MIDDLEWARE = [
@@ -139,3 +139,62 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+SIMPLEUI_HOME_INFO = False
+SIMPLEUI_HOME_ACTION = False
+SIMPLEUI_HOME_QUICK = True
+SIMPLEUI_INDEX = '#'
+
+# SIMPLEUI_CONFIG = {
+#     'system_keep': True,
+#     'menus': [
+#         {
+#             'name': 'Страницы',
+#             'icon': 'fa fa-book',
+#             'models': [
+#                 {
+#                     'name': 'Заявки',
+#                     'icon': 'fa fa-list',
+#                     'url': '/admin/contact/applications/'
+#                 },
+#                 {
+#                     'name': 'Контакты',
+#                     'icon': 'fa fa-money-bill',
+#                     'url': '/admin/contact/contacts/'
+#                 },
+#             ]
+#         },
+#         {
+#             'name': 'Users',
+#             'icon': 'fa fa-user',
+#             'models': [
+#                 {
+#                     'name': 'Users',
+#                     'icon': 'fa fa-user',
+#                     'url': '/admin/users/user/'
+#                 },
+#                 {
+#                     'name': 'Carts',
+#                     'icon': 'fa fa-shopping-cart',
+#                     'url': '/admin/orders/cart/'
+#                 },
+#
+#             ]
+#         },
+#         {
+#             'name': 'Orders',
+#             'icon': 'fa fa-star',
+#             'url': '/admin/orders/order/'
+#         },
+#         {
+#             'name': 'Главная страница',
+#             'icon': 'fa fa-window-maximize',
+#             'url': '/admin/catalog/mainpage/'
+#         },
+#         {
+#             'name': 'Static Pages',
+#             'icon': 'fa fa-file-text',
+#             'url': '/admin/catalog/staticpage/'
+#         },
+#     ]
+# }
