@@ -16,7 +16,6 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(' ')
-
 
 # Application definition
 
@@ -70,7 +68,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,7 +82,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -108,8 +105,6 @@ DATABASES = {
     }
 }
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -128,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -140,82 +134,89 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_HEADERS = "*"
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 SIMPLEUI_HOME_INFO = False
 SIMPLEUI_HOME_ACTION = False
 SIMPLEUI_HOME_QUICK = True
+SIMPLEUI_DEFAULT_THEME = 'black.css'
 SIMPLEUI_INDEX = '#'
+SIMPLEUI_LOGO = '/static/icons/LOGO.svg'
+SIMPLEUI_CONFIG = {
+    'system_keep': False,
+    'menus': [
+        {
+            'name': 'Страницы',
+            'icon': 'fa fa-book',
+            'models': [
+                {
+                    'name': 'О нас',
+                    'icon': 'fa fa-user',
+                    'models': [
+                        {
+                            'name': 'Страница',
+                            'icon': 'fa fa-user',
+                            'url': '/admin/about_us/aboutpage/'
+                        },
+                        {
+                            'name': 'Блоки',
+                            'icon': 'fa fa-shopping-cart',
+                            'url': '/admin/about_us/contentblock/'
+                        },
 
-# SIMPLEUI_CONFIG = {
-#     'system_keep': True,
-#     'menus': [
-#         {
-#             'name': 'Страницы',
-#             'icon': 'fa fa-book',
-#             'models': [
-#                 {
-#                     'name': 'Заявки',
-#                     'icon': 'fa fa-list',
-#                     'url': '/admin/contact/applications/'
-#                 },
-#                 {
-#                     'name': 'Контакты',
-#                     'icon': 'fa fa-money-bill',
-#                     'url': '/admin/contact/contacts/'
-#                 },
-#             ]
-#         },
-#         {
-#             'name': 'Users',
-#             'icon': 'fa fa-user',
-#             'models': [
-#                 {
-#                     'name': 'Users',
-#                     'icon': 'fa fa-user',
-#                     'url': '/admin/users/user/'
-#                 },
-#                 {
-#                     'name': 'Carts',
-#                     'icon': 'fa fa-shopping-cart',
-#                     'url': '/admin/orders/cart/'
-#                 },
-#
-#             ]
-#         },
-#         {
-#             'name': 'Orders',
-#             'icon': 'fa fa-star',
-#             'url': '/admin/orders/order/'
-#         },
-#         {
-#             'name': 'Главная страница',
-#             'icon': 'fa fa-window-maximize',
-#             'url': '/admin/catalog/mainpage/'
-#         },
-#         {
-#             'name': 'Static Pages',
-#             'icon': 'fa fa-file-text',
-#             'url': '/admin/catalog/staticpage/'
-#         },
-#     ]
-# }
+                    ]
+                },
+                {
+                    'name': 'Портфолио',
+                    'icon': 'fa fa-user',
+                    'url': '/admin/portfolio/portfoliopage/'
+                },
+                {
+                    'name': 'Услуги',
+                    'icon': 'fa fa-user',
+                    'models': [
+                        {
+                            'name': 'Страница',
+                            'icon': 'fa fa-user',
+                            'url': '/admin/services/servicepage/'
+                        },
+                        {
+                            'name': 'Блоки',
+                            'icon': 'fa fa-shopping-cart',
+                            'url': '/admin/services/contentblock/'
+                        },
+
+                    ]
+                },
+                {
+                    'name': 'Контакты',
+                    'icon': 'fa fa-money-bill',
+                    'url': '/admin/contacts/application/'
+                },
+                {
+                    'name': 'Заявки',
+                    'icon': 'fa fa-list',
+                    'url': '/admin/contacts/application/'
+                },
+
+            ]
+        },
+
+    ]
+}

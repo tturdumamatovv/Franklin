@@ -27,8 +27,11 @@ class PortfolioDurationInline(nested_admin.NestedStackedInline):
     extra = 1
 
 
+@admin.register(PortfolioPage)
 class PortfolioPageAdmin(nested_admin.NestedModelAdmin):
     inlines = [PortfolioDurationInline, ]
 
-
-admin.site.register(PortfolioPage, PortfolioPageAdmin)
+    class Media:
+        css = {
+            "all": ("css/admin.css",)
+        }
