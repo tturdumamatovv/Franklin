@@ -46,17 +46,14 @@ class IconsBlockAdmin(PolymorphicChildModelAdmin):
 
 class ImageBlockInline(StackedPolymorphicInline.Child):
     model = ImagesBlock
-    inlines = [ImageInline, ]
 
 
 class SliderBlockInline(StackedPolymorphicInline.Child):
     model = SliderBlock
-    inlines = [SlideInline, ]
 
 
 class IconsBlockInline(StackedPolymorphicInline.Child):
     model = IconsBlock
-    inlines = [IconsInline, ]
 
 
 class ContentBlockInline(StackedPolymorphicInline):
@@ -87,3 +84,4 @@ admin.site.register(ContentBlock, ContentBlockAdmin)
 admin.site.register(ImagesBlock, ImagesBlockAdmin)
 admin.site.register(SliderBlock, SliderBlockAdmin)
 admin.site.register(IconsBlock, IconsBlockAdmin)
+
