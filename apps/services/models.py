@@ -58,7 +58,7 @@ class Icon(models.Model):
 
 
 class SliderBlock(ContentBlock):
-    duration = models.CharField(max_length=100, choices=((1, 'right'), (2, 'left')))
+    duration = models.CharField(max_length=100 ,choices=((1, 'right'), (2, 'left')), blank=True, null=True)
     type = 'slider'
 
     def __str__(self):
