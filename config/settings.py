@@ -234,6 +234,11 @@ SIMPLEUI_CONFIG = {
                     'icon': 'fa fa-address-book',
                     'url': '/admin/contacts/contact/'
                 },
+                {
+                    'name': 'Видео',
+                    'icon': 'fa fa-list',
+                    'url': '/admin/about_us/video/'
+                },
 
 
             ]
