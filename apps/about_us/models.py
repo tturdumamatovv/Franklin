@@ -76,8 +76,10 @@ class Image(models.Model):
 
 
 class SliderBlock(ContentBlock):
+
+    duration = models.CharField(max_length=100 ,choices=((1, 'right'), (2, 'left')), blank=True, null=True)
     type = models.CharField(default='slider', max_length=200, editable=False)
-    duration = models.CharField(max_length=100, choices=((1, 'right'), (2, 'left')), verbose_name=_("Направление"))
+
 
     def __str__(self):
         return self.title
