@@ -45,6 +45,7 @@ class ContentBlock(PolymorphicModel):
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
     title = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Заголовок'))
     description = RichTextField(blank=True, null=True, verbose_name=_('Описание'))
+
     class Meta:
         ordering = ['order']
         verbose_name = _('Блок')
@@ -55,11 +56,10 @@ class ContentBlock(PolymorphicModel):
 
 
 class ImagesBlock(ContentBlock):
-    type = models.CharField(max_length=10, default='images', auto_created=True, editable=False)
-
+    type = models.CharField(max_length=20, default='quote', auto_created=True, editable=False)
 
     def __str__(self):
-        return self.title or ''
+        return self.title or self.type
 
     class Meta:
         verbose_name = _('Блок с картинками')
@@ -76,11 +76,9 @@ class Image(models.Model):
 
 
 class SliderBlock(ContentBlock):
-    duration = models.CharField(max_length=10,choices=(('right', 'right'), ('left', 'left')), blank=True, null=True)
+    type = models.CharField(max_length=20, default='slider', auto_created=True, editable=False)
+    duration = models.CharField(max_length=20,choices=(('right', 'right'), ('left', 'left')), blank=True, null=True)
     uppercase = models.BooleanField(default=False)
-
-    type = models.CharField(default='slider', max_length=200, editable=False)
-
 
 
     def __str__(self):
@@ -89,6 +87,15 @@ class SliderBlock(ContentBlock):
     class Meta:
         verbose_name = _('Блок со слайдером')
         verbose_name_plural = _('Блоки со слайдером')
+
+    def save(self, *args, **kwargs):
+        if self.uppercase:
+            self.type = 'subtelties'
+        elif not self.title:
+            self.type = 'philosophy'
+        else:
+            self.type = 'about'
+        super().save(*args, **kwargs)
 
 
 class Slide(models.Model):
@@ -101,7 +108,7 @@ class Slide(models.Model):
 
 
 class IconsBlock(ContentBlock):
-    type = models.CharField(default='icons', max_length=200, editable=False)
+    type = models.CharField(max_length=20, default='Icons', auto_created=True, editable=False)
 
     class Meta:
         verbose_name = _('Блок с иконками')
@@ -112,7 +119,7 @@ class IconsBlock(ContentBlock):
 
 
 class Icon(models.Model):
-    image = models.ImageField(upload_to='icons/')
+    image = models.FileField(upload_to='icons/')
     title = models.CharField(max_length=30)
     sub_title = models.CharField(max_length=50, blank=True, null=True)
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
@@ -122,11 +129,3 @@ class Icon(models.Model):
         ordering = ['order']
         verbose_name = _('Иконка')
         verbose_name_plural = _('Иконки')
-
-
-class Video(models.Model):
-    url = models.FileField(verbose_name=_('URL видео'))
-
-    class Meta:
-        verbose_name = _('Видео')
-        verbose_name_plural = _('Видео')
