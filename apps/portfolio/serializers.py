@@ -38,7 +38,7 @@ class PortfolioProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PortfolioProject
-        fields = ('title', 'sub_title', 'description', 'location', 'images', 'duration')
+        fields = ('title', 'description', 'location', 'images', 'duration')
 
 
 class PortfolioProjectListSerializer(serializers.ModelSerializer):
