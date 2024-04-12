@@ -230,6 +230,11 @@ SIMPLEUI_CONFIG = {
                     'icon': 'fa fa-list',
                     'url': '/admin/contacts/application/'
                 },
+                {
+                    'name': 'Видео',
+                    'icon': 'fa fa-list',
+                    'url': '/admin/about_us/video/'
+                },
 
             ]
         },

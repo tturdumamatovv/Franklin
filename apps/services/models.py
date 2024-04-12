@@ -7,14 +7,15 @@ from apps.about_us.models import SingletonModel
 
 
 class ServicePage(SingletonModel):
-    name = models.CharField(max_length=150, verbose_name=_('Название'))
+    title = models.CharField(max_length=150, verbose_name=_('Заголовок'))
+    sub_title = models.CharField(max_length=200, verbose_name=_('Подзаголовок'), blank=True, null=True)
 
     class Meta:
         verbose_name = _('Страница "Услуги"')
         verbose_name_plural = _('Страница "Услуги"')
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class ContentBlock(PolymorphicModel):

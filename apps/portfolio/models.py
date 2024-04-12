@@ -6,7 +6,11 @@ from apps.about_us.models import SingletonModel
 
 class PortfolioPage(SingletonModel):
     title = models.CharField(max_length=200, verbose_name=_('Загловок'))
-    content = models.TextField(verbose_name=_('Контент'), blank=True, null=True)
+    sub_title = models.CharField(max_length=200, verbose_name=_('Подзаголовок'), blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Страница "Портфолио"')
+        verbose_name_plural = _('Страница "Портфолио"')
 
     def __str__(self):
         return self.title
