@@ -34,7 +34,7 @@ class ContentBlock(PolymorphicModel):
 
 
 class IconsBlock(ContentBlock):
-    type = 'icons'
+    type = models.CharField(max_length=20, default='principes', auto_created=True, editable=False)
 
     class Meta:
         verbose_name = _('Блок с иконками')
@@ -58,9 +58,9 @@ class Icon(models.Model):
 
 
 class SliderBlock(ContentBlock):
-    duration = models.CharField(max_length=10,choices=(('right', 'right'), ('left', 'left')), blank=True, null=True)
+    duration = models.CharField(max_length=20,choices=(('right', 'right'), ('left', 'left')), blank=True, null=True)
     uppercase = models.BooleanField(default=False)
-    type = 'slider'
+    type = models.CharField(max_length=10, default='slider', auto_created=True, editable=False)
 
     def __str__(self):
         return self.title
@@ -68,6 +68,15 @@ class SliderBlock(ContentBlock):
     class Meta:
         verbose_name = _('Блок со слайдером')
         verbose_name_plural = _('Блоки со слайдером')
+
+    def save(self, *args, **kwargs):
+        if self.uppercase:
+            self.type = 'subtelties'
+        elif not self.title:
+            self.type = 'philosophy'
+        else:
+            self.type = 'about'
+        super().save(*args, **kwargs)
 
 
 class Slide(models.Model):
@@ -80,8 +89,8 @@ class Slide(models.Model):
 
 
 class StepBlock(ContentBlock):
+    type = models.CharField(max_length=20, default='service-plan', auto_created=True, editable=False)
     sub_title = models.CharField(max_length=150, verbose_name=_('Подзаголовок'), blank=True, null=True)
-    type = 'steps'
 
     def __str__(self):
         return self.title
@@ -103,6 +112,7 @@ class Step(models.Model):
 
 
 class AboutService(ContentBlock):
+    type = models.CharField(max_length=20, default='equipment', auto_created=True, editable=False)
     sub_title = models.CharField(max_length=150, verbose_name=_('Подзаголовок'))
     sub_sub_title = models.CharField(max_length=150, verbose_name=_('Под-подзаголовок'))
     bonus = models.CharField(max_length=150, verbose_name=_('Бонус'))
@@ -120,8 +130,7 @@ class AboutServiceImage(models.Model):
 
 
 class ImagesBlock(ContentBlock):
-    type = 'images'
-
+    type = models.CharField(max_length=20, default='quote', auto_created=True, editable=False)
     def __str__(self):
         return self.title
 
