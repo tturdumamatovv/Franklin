@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
+    'modeltranslation',
+
     # Created
     'apps.about_us',
     'apps.portfolio',
@@ -61,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -133,6 +137,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('ru', 'Russian'),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -223,12 +232,7 @@ SIMPLEUI_CONFIG = {
                 {
                     'name': 'Контакты',
                     'icon': 'fa fa-address-book',
-                    'url': '/admin/contacts/application/'
-                },
-                {
-                    'name': 'Заявки',
-                    'icon': 'fa fa-list',
-                    'url': '/admin/contacts/application/'
+                    'url': '/admin/contacts/contact/'
                 },
                 {
                     'name': 'Видео',
@@ -236,7 +240,13 @@ SIMPLEUI_CONFIG = {
                     'url': '/admin/about_us/video/'
                 },
 
+
             ]
+        },
+        {
+            'name': 'Заявки',
+            'icon': 'fa fa-list',
+            'url': '/admin/contacts/application/'
         },
 
     ]

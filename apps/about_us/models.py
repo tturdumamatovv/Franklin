@@ -45,7 +45,6 @@ class ContentBlock(PolymorphicModel):
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
     title = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Заголовок'))
     description = RichTextField(blank=True, null=True, verbose_name=_('Описание'))
-
     class Meta:
         ordering = ['order']
         verbose_name = _('Блок')
@@ -56,7 +55,8 @@ class ContentBlock(PolymorphicModel):
 
 
 class ImagesBlock(ContentBlock):
-    type = 'images'
+    type = models.CharField(max_length=10, default='images', auto_created=True, editable=False)
+
 
     def __str__(self):
         return self.title
@@ -76,8 +76,12 @@ class Image(models.Model):
 
 
 class SliderBlock(ContentBlock):
-    type = 'slider'
-    duration = models.CharField(max_length=100 ,choices=((1, 'right'), (2, 'left')))
+    duration = models.CharField(max_length=10,choices=(('right', 'right'), ('left', 'left')), blank=True, null=True)
+    uppercase = models.BooleanField(default=False)
+
+    type = models.CharField(default='slider', max_length=200, editable=False)
+
+
 
     def __str__(self):
         return self.title
@@ -97,7 +101,7 @@ class Slide(models.Model):
 
 
 class IconsBlock(ContentBlock):
-    type = 'icons'
+    type = models.CharField(default='icons', max_length=200, editable=False)
 
     class Meta:
         verbose_name = _('Блок с иконками')
