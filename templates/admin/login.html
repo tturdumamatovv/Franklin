@@ -33,8 +33,10 @@
                 background-repeat: no-repeat;
                 background-position: 50%;
                 background-size: 100%;
-                padding: 20px 0;
+                padding: 0;
                 position: relative;
+                max-width: 350px;
+                margin: 0 auto;
             }
         </style>
     {% endblock %}
@@ -45,7 +47,7 @@
 </head>
 <body class="bg">
 {% block main %}
-    <div class="login-main">
+    <div class="login-main" style="padding: 0; margin-top: 170px">
     {% block logo %}
         <div class="logo">
             {% if "SIMPLEUI_LOGO"|get_config %}
@@ -58,6 +60,7 @@
 
     {% block header %}
         <div class="header">Franklin Admin panel</div>
+
     {% endblock %}
 
     {% block errors %}
@@ -106,6 +109,8 @@
             <input type="hidden" name="next" value="{{ next }}"/>
         </form>
     {% endblock %}
+            <div class="header">Tata dev</div>
+
 </div>
 {% endblock %}
 {% include 'admin/includes/js-part.html' %}
