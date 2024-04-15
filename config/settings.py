@@ -140,6 +140,7 @@ USE_TZ = True
 
 LANGUAGES = (
     ('en', 'English'),
+    ('ru', 'Russian'),
 )
 
 # Static files (CSS, JavaScript, Images)
