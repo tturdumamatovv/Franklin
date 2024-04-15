@@ -59,7 +59,7 @@ class ImagesBlock(ContentBlock):
     type = models.CharField(max_length=20, default='quote', auto_created=True, editable=False)
 
     def __str__(self):
-        return self.title
+        return self.title or self.type
 
     class Meta:
         verbose_name = _('Блок с картинками')
@@ -82,7 +82,7 @@ class SliderBlock(ContentBlock):
 
 
     def __str__(self):
-        return self.title if self.title else f'{self.id}'
+        return self.title or self.type
 
     class Meta:
         verbose_name = _('Блок со слайдером')
@@ -109,6 +109,7 @@ class Slide(models.Model):
 
 class IconsBlock(ContentBlock):
     type = models.CharField(max_length=20, default='Icons', auto_created=True, editable=False)
+
     class Meta:
         verbose_name = _('Блок с иконками')
         verbose_name_plural = _('Блоки с иконками')
@@ -128,3 +129,14 @@ class Icon(models.Model):
         ordering = ['order']
         verbose_name = _('Иконка')
         verbose_name_plural = _('Иконки')
+
+
+
+class Video(models.Model):
+    url = models.FileField(verbose_name=_('URL видео'))
+
+    class Meta:
+        verbose_name = _('Видео')
+        verbose_name_plural = _('Видео')
+
+

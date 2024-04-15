@@ -7,7 +7,8 @@ from .models import (
     SliderBlock,
     Slide,
     IconsBlock,
-    Icon
+    Icon,
+    Video
 )
 
 
@@ -73,3 +74,9 @@ class AboutPageSerializer(serializers.ModelSerializer):
                 serializer = IconsBlockSerializer(block)
                 blocks.append(serializer.data)
         return blocks
+
+
+class VideoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Video
+        fields = ['id', 'url']

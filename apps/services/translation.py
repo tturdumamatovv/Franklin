@@ -5,7 +5,7 @@ from .models import (ServicePage, ContentBlock, IconsBlock, Icon, SliderBlock, S
 
 @register(ServicePage)
 class ServicePageTranslationOptions(TranslationOptions):
-    fields = ('name',)
+    fields = ('title', 'sub_title')
 
 
 @register(ContentBlock)

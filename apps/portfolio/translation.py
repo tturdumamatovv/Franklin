@@ -3,7 +3,7 @@ from .models import PortfolioPage, PortfolioDuration, PortfolioProject, Portfoli
 
 @register(PortfolioPage)
 class PortfolioPageTranslationOptions(TranslationOptions):
-    fields = ('title', 'content',)  # Specify which fields should be translatable
+    fields = ('title', 'sub_title',)  # Specify which fields should be translatable
 
 @register(PortfolioDuration)
 class PortfolioDurationTranslationOptions(TranslationOptions):

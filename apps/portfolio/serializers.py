@@ -11,7 +11,7 @@ from .models import (
 class MainPagePortfolioSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortfolioPage
-        fields = ('title', 'content')
+        fields = ('title', 'sub_title')
 
 
 class PortfolioDurationSerializer(serializers.ModelSerializer):
