@@ -64,7 +64,7 @@ class SliderBlock(ContentBlock):
     type = models.CharField(max_length=10, default='slider', auto_created=True, editable=False)
 
     def __str__(self):
-        return self.title
+        return self.title or self.type
 
     class Meta:
         verbose_name = _('Блок со слайдером')
@@ -132,8 +132,9 @@ class AboutServiceImage(models.Model):
 
 class ImagesBlock(ContentBlock):
     type = models.CharField(max_length=20, default='quote', auto_created=True, editable=False)
+
     def __str__(self):
-        return self.title
+        return self.title or self.type
 
     class Meta:
         verbose_name = _('Блок с картинками')
