@@ -98,6 +98,8 @@ class AboutPageAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
 class ContentBlockAdmin(PolymorphicParentModelAdmin):
     base_model = ContentBlock
     child_models = (ImagesBlock, SliderBlock, IconsBlock)
+    list_display = ('id', 'title','description')
+
 
 
 admin.site.register(AboutPage, AboutPageAdmin)
