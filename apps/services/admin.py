@@ -148,6 +148,7 @@ class ServicePageAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
 class ContentBlockAdmin(PolymorphicParentModelAdmin):
     base_model = ContentBlock
     child_models = (ImagesBlock, SliderBlock, IconsBlock, AboutService, StepBlock, Diagram)
+    list_display = ('id', 'title', 'description')
 
 
 admin.site.register(ServicePage, ServicePageAdmin)
