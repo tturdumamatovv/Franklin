@@ -1,5 +1,4 @@
 {% load i18n static simpletags %}
-{% load admin_contact_tags %}
 
 <div id="home">
 
@@ -94,9 +93,31 @@
     </el-card>
     {% endif %}
 
-
+<el-card class="timeline">
+    <div slot="header" class="clearfix">
+        <span>{% trans 'Recent Applications' %}</span>
+    </div>
+    {% load admin_contact_tags %}
+    {% get_latest_applications as latest_applications %}
+    {% if latest_applications %}
+    <div id="applicationsBlock" class="hidden">
+        <ul>
+            {% for application in latest_applications %}
+            <li>
+                <strong>{{ application.name }}</strong> - {{ application.phone }}
+                <br>{{ application.message | truncatewords:20 }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <p>{% trans 'No recent applications available.' %}</p>
+    {% endif %}
+</el-card>
 
 </div>
+
+
 
 <el-dialog
         title="Upgrade Simpleui"
@@ -121,3 +142,14 @@
         <div v-text="upgrade.body"></div>
     </div>
 </el-dialog>
+
+<script>
+    function toggleVisibility(id) {
+        var element = document.getElementById(id);
+        if (element.classList.contains('hidden')) {
+            element.classList.remove('hidden');
+        } else {
+            element.classList.add('hidden');
+        }
+    }
+</script>
