@@ -1,5 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import Contact, Address, Phone, Email, SocialLink, Application
+from .models import Contact, Address, SocialLink
 
 
 @register(Contact)
@@ -10,4 +10,10 @@ class ContactTranslationOptions(TranslationOptions):
 @register(Address)
 class AddressTranslationOptions(TranslationOptions):
     fields = ('address',)
+
+    
+@register(SocialLink)
+class SocialLinkTranslationOptions(TranslationOptions):
+    fields = ('link',)
+
 
