@@ -180,7 +180,7 @@ SIMPLEUI_CONFIG = {
                     'icon': 'fa fa-info-circle',
                     'models': [
                         {
-                            'name': 'Страница',
+                            'name': 'Страница AboutUs',
                             'icon': 'fa fa-file-text',
                             'url': '/admin/about_us/aboutpage/'
                         },
@@ -197,7 +197,7 @@ SIMPLEUI_CONFIG = {
                     'icon': 'fa fa-folder',
                     'models': [
                         {
-                            'name': 'Страница',
+                            'name': 'Страница Portfolio',
                             'icon': 'fa fa-file-text',
                             'url': '/admin/portfolio/portfoliopage/'
                         },
@@ -218,7 +218,7 @@ SIMPLEUI_CONFIG = {
                     'icon': 'fa fa-user',
                     'models': [
                         {
-                            'name': 'Страница',
+                            'name': 'Страница Services',
                             'icon': 'fa fa-file-text',
                             'url': '/admin/services/servicepage/'
                         },
