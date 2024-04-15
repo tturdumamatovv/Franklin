@@ -1,5 +1,7 @@
 from django.contrib import admin
 import nested_admin
+from django.utils.safestring import mark_safe
+
 from .models import PortfolioPage, PortfolioDuration, PortfolioProject, PortfolioImage
 
 
@@ -16,6 +18,12 @@ class NestedBaseInline(nested_admin.NestedStackedInline):
 
 class PortfolioImageInline(NestedBaseInline):
     model = PortfolioImage
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src = {obj.image.url} width = "300"')
+
+    get_image.short_description = "Изображение"
 
 
 class PortfolioProjectInline(NestedBaseInline):
