@@ -9,18 +9,13 @@ from rest_framework import generics
 from rest_framework.response import Response
 
 
-class AllPagesView(generics.RetrieveAPIView):
-    def get(self, request, *args, **kwargs):
+class AllPagesView(generics.ListAPIView):
+    serializer_class = AllPagesSerializer
+
+    def get_queryset(self):
         about_page = AboutPage.load()
         contact = Contact.load()
         portfolio_page = PortfolioPage.load()
         service_page = ServicePage.load()
 
-        serializer = AllPagesSerializer({
-            'about_page': about_page,
-            'contact': contact,
-            'portfolio_page': portfolio_page,
-            'service_page': service_page
-        })
-
-        return Response(serializer.data)
+        return [about_page, contact, portfolio_page, service_page]
