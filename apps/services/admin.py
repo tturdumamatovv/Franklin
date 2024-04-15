@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import StackedInline
+from django.utils.safestring import mark_safe
 
 from polymorphic.admin import (
     PolymorphicInlineSupportMixin,
@@ -27,22 +28,52 @@ from .models import (
 
 class ImageInline(StackedInline):
     model = Image
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src = {obj.image.url} width = "300"')
+
+    get_image.short_description = "Изображение"
 
 
 class SlideInline(StackedInline):
     model = Slide
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src = {obj.image.url} width = "300"')
+
+    get_image.short_description = "Изображение"
 
 
 class IconsInline(StackedInline):
     model = Icon
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src = {obj.image.url} width = "300"')
+
+    get_image.short_description = "Изображение"
 
 
 class AboutServiceImageInline(StackedInline):
     model = AboutServiceImage
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src = {obj.image.url} width = "300"')
+
+    get_image.short_description = "Изображение"
 
 
 class StepInline(StackedInline):
     model = Step
+    readonly_fields = ("get_image",)
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src = {obj.image.url} width = "300"')
+
+    get_image.short_description = "Изображение"
 
 
 class ImagesBlockAdmin(PolymorphicChildModelAdmin):
