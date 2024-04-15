@@ -52,7 +52,7 @@ class ContentBlock(PolymorphicModel):
         verbose_name_plural = _('Блоки')
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.title}" or self.description[:10] or ''
 
 
 class ImagesBlock(ContentBlock):
