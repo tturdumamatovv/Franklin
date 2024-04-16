@@ -31,7 +31,7 @@ class AboutPage(SingletonModel):
         verbose_name_plural = _('Страница "О Нас"')
 
     def __str__(self):
-        return self.title
+        return 'Страница "О Нас"'
 
 
 class ContentBlock(PolymorphicModel):
