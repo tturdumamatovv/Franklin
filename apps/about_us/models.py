@@ -131,9 +131,9 @@ class Icon(models.Model):
         verbose_name_plural = _('Иконки')
 
 
-
 class Video(models.Model):
     url = models.FileField(verbose_name=_('URL видео'))
+    preload = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = _('Видео')
