@@ -23,6 +23,7 @@ class PortfolioDurationSerializer(serializers.ModelSerializer):
 
 
 class PortfolioImageSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = PortfolioImage
         fields = ('image',)
