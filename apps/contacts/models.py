@@ -46,7 +46,7 @@ class SocialLink(models.Model):
     contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name='social_links')
 
     def __str__(self):
-        return self.contact
+        return f'{self.link}' or 'Social Link'
 
 
 class Application(models.Model):
