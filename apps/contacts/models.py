@@ -13,7 +13,7 @@ class Contact(SingletonModel):
         verbose_name_plural = _('Страница "Контакты"')
 
     def __str__(self):
-        return self.title
+        return 'Контакты'
 
 
 class Address(models.Model):
@@ -42,7 +42,7 @@ class Email(models.Model):
 
 class SocialLink(models.Model):
     link = models.URLField(max_length=200, verbose_name=_('Ссылка'))
-    icon = models.ImageField(upload_to='social_icons', verbose_name='Иконка')
+    icon = models.FileField(upload_to='social_icons', verbose_name='Иконка')
     contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name='social_links')
 
     def __str__(self):

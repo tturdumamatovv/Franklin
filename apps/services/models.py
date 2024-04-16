@@ -15,7 +15,7 @@ class ServicePage(SingletonModel):
         verbose_name_plural = _('Страница "Услуги"')
 
     def __str__(self):
-        return self.title
+        return 'Страница "Услуги"'
 
 
 class ContentBlock(PolymorphicModel):

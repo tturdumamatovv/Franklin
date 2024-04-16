@@ -13,7 +13,7 @@ class PortfolioPage(SingletonModel):
         verbose_name_plural = _('Страница "Портфолио"')
 
     def __str__(self):
-        return self.title
+        return 'Страница "Портфолио"'
 
 
 class PortfolioDuration(models.Model):
