@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import AboutPageAPIView, VideoListView, VideoHome, VideoPreload
+from .views import AboutPageAPIView, VideoHome, VideoPreload
 
 urlpatterns = [
     path('about-page/', AboutPageAPIView.as_view(), name='about-page'),

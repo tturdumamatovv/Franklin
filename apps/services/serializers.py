@@ -16,21 +16,48 @@ from .models import (
 
 
 class IconSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Icon
         fields = '__all__'
 
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if request is not None:
+            return request.build_absolute_uri(obj.image.url)
+        else:
+            return obj.image.url
+
 
 class SlideSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Slide
         fields = '__all__'
 
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if request is not None:
+            return request.build_absolute_uri(obj.image.url)
+        else:
+            return obj.image.url
+
 
 class StepSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Step
         fields = '__all__'
+
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if request is not None:
+            return request.build_absolute_uri(obj.image.url)
+        else:
+            return obj.image.url
 
 
 class AboutServiceImageSerializer(serializers.ModelSerializer):
@@ -40,9 +67,18 @@ class AboutServiceImageSerializer(serializers.ModelSerializer):
 
 
 class ImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Image
         fields = '__all__'
+
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if request is not None:
+            return request.build_absolute_uri(obj.image.url)
+        else:
+            return obj.image.url
 
 
 class IconsBlockSerializer(serializers.ModelSerializer):
@@ -94,20 +130,21 @@ class ServicePageSerializer(serializers.ModelSerializer):
 
     def get_content_blocks(self, obj):
         blocks = []
+        request = self.context.get('request')
         for block in obj.content_blocks.all():
             if isinstance(block, IconsBlock):
-                serializer = IconsBlockSerializer(block)
+                serializer = IconsBlockSerializer(block, context={'request': request})
                 blocks.append(serializer.data)
             elif isinstance(block, SliderBlock):
-                serializer = SliderBlockSerializer(block)
+                serializer = SliderBlockSerializer(block, context={'request': request})
                 blocks.append(serializer.data)
             elif isinstance(block, StepBlock):
-                serializer = StepBlockSerializer(block)
+                serializer = StepBlockSerializer(block, context={'request': request})
                 blocks.append(serializer.data)
             elif isinstance(block, AboutService):
-                serializer = AboutServiceSerializer(block)
+                serializer = AboutServiceSerializer(block, context={'request': request})
                 blocks.append(serializer.data)
             elif isinstance(block, ImagesBlock):
-                serializer = ImagesBlockSerializer(block)
+                serializer = ImagesBlockSerializer(block, context={'request': request})
                 blocks.append(serializer.data)
         return blocks

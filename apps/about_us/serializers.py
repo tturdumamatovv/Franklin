@@ -13,21 +13,48 @@ from .models import (
 
 
 class ImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Image
         fields = '__all__'
 
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if request is not None:
+            return request.build_absolute_uri(obj.image.url)
+        else:
+            return obj.image.url
+
 
 class SlideSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Slide
         fields = '__all__'
 
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if request is not None:
+            return request.build_absolute_uri(obj.image.url)
+        else:
+            return obj.image.url
+
 
 class IconSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Icon
         fields = '__all__'
+
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if request is not None:
+            return request.build_absolute_uri(obj.image.url)
+        else:
+            return obj.image.url
 
 
 class ImagesBlockSerializer(serializers.ModelSerializer):
@@ -63,15 +90,16 @@ class AboutPageSerializer(serializers.ModelSerializer):
 
     def get_content_blocks(self, obj):
         blocks = []
+        request = self.context.get('request')
         for block in obj.content_blocks.all():
             if isinstance(block, ImagesBlock):
-                serializer = ImagesBlockSerializer(block)
+                serializer = ImagesBlockSerializer(block, context={'request': request})
                 blocks.append(serializer.data)
             if isinstance(block, SliderBlock):
-                serializer = SliderBlockSerializer(block)
+                serializer = SliderBlockSerializer(block, context={'request': request})
                 blocks.append(serializer.data)
             if isinstance(block, IconsBlock):
-                serializer = IconsBlockSerializer(block)
+                serializer = IconsBlockSerializer(block, context={'request': request})
                 blocks.append(serializer.data)
         return blocks
 

@@ -56,6 +56,8 @@ class ImagesBlock(ContentBlock):
     def __str__(self):
         return self.title or self.type
 
+
+
     class Meta:
         verbose_name = _('Блок с картинками')
         verbose_name_plural = _('Блоки с картинками')
