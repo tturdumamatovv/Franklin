@@ -15,15 +15,17 @@ class MainPagePortfolioSerializer(serializers.ModelSerializer):
 
 
 class PortfolioDurationSerializer(serializers.ModelSerializer):
+    page = MainPagePortfolioSerializer()
+
     class Meta:
         model = PortfolioDuration
-        fields = ('name', 'image')
+        fields = ('page', 'name', 'name_en', 'name_ru', 'image',)
 
 
 class PortfolioImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortfolioImage
-        fields = ('image', )
+        fields = ('image',)
 
 
 class PortfolioDurationForProjectSerializer(serializers.ModelSerializer):
