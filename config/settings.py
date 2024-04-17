@@ -159,6 +159,8 @@ CORS_ALLOW_HEADERS = "*"
 
 CSRF_TRUSTED_ORIGINS = ['https://tatadev.pro/', 'https://www.tatadev.pro/']
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
