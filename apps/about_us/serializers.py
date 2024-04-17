@@ -105,6 +105,11 @@ class AboutPageSerializer(serializers.ModelSerializer):
 
 
 class VideoSerializer(serializers.ModelSerializer):
+    url = serializers.SerializerMethodField()
+
     class Meta:
         model = Video
         fields = ['id', 'url']
+
+    def get_url(self, obj):
+        return self.context['request'].build_absolute_uri(obj.url.url)

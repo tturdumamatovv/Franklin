@@ -19,12 +19,12 @@ class VideoListView(generics.ListAPIView):
 class VideoHome(APIView):
     def get(self, request):
         video = Video.objects.filter(preload=False).first()
-        serializer = VideoSerializer(video)
+        serializer = VideoSerializer(video, context={'request': request})
         return Response(serializer.data)
 
 
 class VideoPreload(APIView):
     def get(self, request):
         video = Video.objects.filter(preload=True).first()
-        serializer = VideoSerializer(video)
+        serializer = VideoSerializer(video, context={'request': request})
         return Response(serializer.data)
