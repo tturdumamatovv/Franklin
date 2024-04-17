@@ -19,7 +19,7 @@ class PortfolioDurationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PortfolioDuration
-        fields = ('id', 'page', 'name', 'name_en', 'name_ru', 'image',)
+        fields = ('slug', 'page', 'name', 'name_en', 'name_ru', 'image',)
 
 
 class PortfolioImageSerializer(serializers.ModelSerializer):
@@ -32,7 +32,7 @@ class PortfolioImageSerializer(serializers.ModelSerializer):
 class PortfolioDurationForProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortfolioDuration
-        fields = ('name',)
+        fields = ('name', 'slug')
 
 
 class PortfolioProjectSerializer(serializers.ModelSerializer):
@@ -50,7 +50,7 @@ class PortfolioProjectListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PortfolioProject
-        fields = ('id', 'images', 'duration')
+        fields = ('slug', 'images', 'duration')
 
 
 class PortfolioProjectToRetrieveSerializer(serializers.ModelSerializer):
@@ -58,7 +58,8 @@ class PortfolioProjectToRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PortfolioProject
-        fields = ('title', 'description', 'location', 'images')
+        fields = ('title', 'title_en', 'title_ru', 'description',  'description_en',  'description_ru',
+                  'location', 'location_en', 'location_ru', 'images')
 
 
 class PortfolioDurationWithProjectsSerializer(serializers.ModelSerializer):
@@ -66,4 +67,4 @@ class PortfolioDurationWithProjectsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PortfolioDuration
-        fields = ('id', 'name', 'image', 'projects')
+        fields = ('id', 'name', 'name_en', 'name_ru', 'image', 'projects')

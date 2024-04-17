@@ -24,7 +24,7 @@ class PortfolioPageListView(generics.ListAPIView):
 class PortfolioProjectDetailView(generics.RetrieveAPIView):
     queryset = PortfolioProject.objects.all()
     serializer_class = PortfolioProjectSerializer
-    lookup_field = 'id'
+    lookup_field = 'slug'
 
 
 class PortfolioDurationListView(generics.ListAPIView):
@@ -40,7 +40,7 @@ class PortfolioProjectListView(generics.ListAPIView):
 class PortfolioDurationWithProjectsDetailView(generics.RetrieveAPIView):
     queryset = PortfolioDuration.objects.all()
     serializer_class = PortfolioDurationWithProjectsSerializer
-    lookup_field = 'id'
+    lookup_field = 'slug'
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
