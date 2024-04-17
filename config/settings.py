@@ -157,6 +157,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_HEADERS = "*"
 
+CSRF_TRUSTED_ORIGINS = ['https://tatadev.pro/', 'https://www.tatadev.pro/']
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
