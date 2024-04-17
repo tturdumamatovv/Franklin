@@ -33,17 +33,13 @@ class ServicePageSerializer(serializers.ModelSerializer):
 
 class AllPagesSerializer(serializers.Serializer):
     about_page = serializers.SerializerMethodField()
-    contact_page = serializers.SerializerMethodField()
     portfolio_page = serializers.SerializerMethodField()
     service_page = serializers.SerializerMethodField()
+    contact_page = serializers.SerializerMethodField()
 
     def get_about_page(self, obj):
         instance = AboutPage.objects.first()
         return AboutPageSerializer(instance).data if instance else None
-
-    def get_contact_page(self, obj):
-        instance = Contact.objects.first()
-        return ContactPageSerializer(instance).data if instance else None
 
     def get_portfolio_page(self, obj):
         instance = PortfolioPage.objects.first()
@@ -52,6 +48,10 @@ class AllPagesSerializer(serializers.Serializer):
     def get_service_page(self, obj):
         instance = ServicePage.objects.first()
         return ServicePageSerializer(instance).data if instance else None
+
+    def get_contact_page(self, obj):
+        instance = Contact.objects.first()
+        return ContactPageSerializer(instance).data if instance else None
 
 
 class PreloadSerializer(serializers.ModelSerializer):
