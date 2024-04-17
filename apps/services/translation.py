@@ -1,5 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import (ServicePage, ContentBlock, IconsBlock, Icon, SliderBlock, Slide,
+from .models import (ServicePage, ContentBlock, IconsBlock, Icon, SliderBlock, Service,
                      StepBlock, Step, AboutService, AboutServiceImage, ImagesBlock, Image, Diagram)
 
 
@@ -8,10 +8,29 @@ class ServicePageTranslationOptions(TranslationOptions):
     fields = ('title', 'sub_title')
 
 
+@register(Service)
+class ServicePageTranslationOptions(TranslationOptions):
+    fields = ('title',)
+
+
 @register(ContentBlock)
 class ContentBlockTranslationOptions(TranslationOptions):
     fields = ('title', 'description',)
 
+
+@register(ImagesBlock)
+class ContentBlockTranslationOptions(TranslationOptions):
+    pass
+
+
+@register(SliderBlock)
+class ContentBlockTranslationOptions(TranslationOptions):
+    pass
+
+
+@register(IconsBlock)
+class ContentBlockTranslationOptions(TranslationOptions):
+    pass
 
 
 @register(Icon)
