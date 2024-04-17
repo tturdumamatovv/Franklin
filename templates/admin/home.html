@@ -15,7 +15,7 @@
                 <el-card class="box-card">
                     <div slot="header" class="clearfix">
                         <i class="fas fa-link"></i>
-                        <span v-text="getLanuage('Quick navigation')"></span>
+                        <span v-text="getLanuage('Быстрая навигация')"></span>
                     </div>
                     <div class="clearfix">
                         {% if "SIMPLEUI_HOME_QUICK"|get_config != False %}
@@ -95,21 +95,33 @@
 
 <el-card class="timeline">
     <div slot="header" class="clearfix">
-        <span>{% trans 'Recent Applications' %}</span>
+        <span>{% trans 'Последние заявки' %}</span>
     </div>
     {% load admin_contact_tags %}
     {% get_latest_applications as latest_applications %}
     {% if latest_applications %}
     <div id="applicationsBlock" class="hidden">
-        <ul>
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Имя</th>
+                <th>Телефон</th>
+                <th>Сообщение</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for application in latest_applications %}
-            <li>
-                <strong>{{ application.name }}</strong> - {{ application.phone }}
-                <br>{{ application.message | truncatewords:20 }}
-            </li>
+            <tr>
+
+                <td><a href="/admin/contacts/application/{{ application.id }}/change/"><strong>{{ application.name }}</strong></a></td>
+                <td>{{ application.phone }}</td>
+                <td>{{ application.message | truncatewords:20 }}</td>
+            </tr>
             {% endfor %}
-        </ul>
-    </div>
+        </tbody>
+    </table>
+</div>
+
     {% else %}
     <p>{% trans 'No recent applications available.' %}</p>
     {% endif %}

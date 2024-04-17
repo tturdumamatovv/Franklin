@@ -178,7 +178,7 @@ SIMPLEUI_CONFIG = {
             'models': [
                 {
                     'name': 'Preload',
-                    'icon': 'fa fa-free',
+                    'icon': 'fa fa-download',
                     'models': [
                         {
                             'name': 'Страница Preload',

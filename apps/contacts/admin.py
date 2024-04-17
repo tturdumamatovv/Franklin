@@ -40,5 +40,10 @@ class ContactAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(Application)
+@admin.register(Application)
+class ApplicationAdmin(admin.ModelAdmin):
+    fields = ['name', 'phone', 'message', 'created_at']
+    readonly_fields = ['name', 'phone', 'message', 'created_at']
+
+
 admin.site.register(Preload)
