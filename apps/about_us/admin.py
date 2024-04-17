@@ -46,6 +46,7 @@ class SlideInline(StackedInline):
 
 class IconsInline(StackedInline):
     model = Icon
+    extra = 0
     readonly_fields = ("get_image",)
 
     def get_image(self, obj):
@@ -99,7 +100,8 @@ class AboutPageAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
 class ContentBlockAdmin(PolymorphicParentModelAdmin):
     base_model = ContentBlock
     child_models = (ImagesBlock, SliderBlock, IconsBlock)
-    list_display = ('id', 'title','description')
+    list_editable = ('order',)
+    list_display = ('id', 'title', 'description', 'order')
 
 
 

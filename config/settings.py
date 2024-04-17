@@ -182,12 +182,12 @@ SIMPLEUI_CONFIG = {
                     'models': [
                         {
                             'name': 'Страница Preload',
-                            'icon': 'fa fa-free',
+                            'icon': 'fa fa-download',
                             'url': '/admin/contacts/preload/'
                         },
                         {
                             'name': 'Видео',
-                            'icon': 'fa fa-list',
+                            'icon': 'fa fa-video',
                             'url': '/admin/about_us/video/'
                         },
 

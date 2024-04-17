@@ -29,7 +29,7 @@ from .models import (
 class ImageInline(StackedInline):
     model = Image
     readonly_fields = ("get_image",)
-
+    extra = 0
     def get_image(self, obj):
         return mark_safe(f'<img src = {obj.image.url} width = "300"')
 
@@ -39,7 +39,7 @@ class ImageInline(StackedInline):
 class SlideInline(StackedInline):
     model = Slide
     readonly_fields = ("get_image",)
-
+    extra = 0
     def get_image(self, obj):
         return mark_safe(f'<img src = {obj.image.url} width = "300"')
 
@@ -49,7 +49,7 @@ class SlideInline(StackedInline):
 class IconsInline(StackedInline):
     model = Icon
     readonly_fields = ("get_image",)
-
+    extra = 0
     def get_image(self, obj):
         return mark_safe(f'<img src = {obj.image.url} width = "300"')
 
@@ -59,7 +59,7 @@ class IconsInline(StackedInline):
 class AboutServiceImageInline(StackedInline):
     model = AboutServiceImage
     readonly_fields = ("get_image",)
-
+    extra = 0
     def get_image(self, obj):
         return mark_safe(f'<img src = {obj.image.url} width = "300"')
 
@@ -69,7 +69,7 @@ class AboutServiceImageInline(StackedInline):
 class StepInline(StackedInline):
     model = Step
     readonly_fields = ("get_image",)
-
+    extra = 0
     def get_image(self, obj):
         return mark_safe(f'<img src = {obj.image.url} width = "300"')
 
@@ -158,7 +158,8 @@ class ServiceAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
 class ContentBlockAdmin(PolymorphicParentModelAdmin):
     base_model = ContentBlock
     child_models = (ImagesBlock, SliderBlock, IconsBlock, AboutService, StepBlock, Diagram)
-    list_display = ('id', 'title', 'description')
+    list_editable = ('order',)
+    list_display = ('id', 'title', 'description', 'order')
 
 
 admin.site.register(ServicePage, ServicePageAdmin)
