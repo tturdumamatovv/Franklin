@@ -18,9 +18,16 @@ class ServicePage(SingletonModel):
         return 'Страница "Услуги"'
 
 
-class ContentBlock(PolymorphicModel):
-    page = models.ForeignKey(ServicePage, on_delete=models.CASCADE, related_name='content_blocks',
+class Service(models.Model):
+    page = models.ForeignKey(ServicePage, on_delete=models.CASCADE, related_name='services',
                              verbose_name=_('Страница'))
+    title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
+    image = models.ImageField(upload_to='services/', verbose_name=_('Изображение'))
+
+
+class ContentBlock(PolymorphicModel):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='content_blocks',
+                             verbose_name=_('Сервис'))
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
     title = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Заголовок'))
     description = RichTextField(blank=True, null=True, verbose_name=_('Описание'))

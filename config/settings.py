@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'apps.about_us',
     'apps.portfolio',
     'apps.services',
-    'apps.contacts'
+    'apps.contacts',
 ]
 
 MIDDLEWARE = [
@@ -171,10 +171,28 @@ SIMPLEUI_LOGO = '/static/icons/LOGO.svg'
 SIMPLEUI_CONFIG = {
     'system_keep': False,
     'menus': [
+
         {
             'name': 'Страницы',
             'icon': 'fa fa-book',
             'models': [
+                {
+                    'name': 'Preload',
+                    'icon': 'fa fa-free',
+                    'models': [
+                        {
+                            'name': 'Страница Preload',
+                            'icon': 'fa fa-free',
+                            'url': '/admin/contacts/preload/'
+                        },
+                        {
+                            'name': 'Видео',
+                            'icon': 'fa fa-list',
+                            'url': '/admin/about_us/video/'
+                        },
+
+                    ]
+                },
                 {
                     'name': 'О нас',
                     'icon': 'fa fa-info-circle',
@@ -223,7 +241,13 @@ SIMPLEUI_CONFIG = {
                             'url': '/admin/services/servicepage/'
                         },
                         {
-                            'name': 'Блоки',
+                            'name': 'Сервисы',
+                            'icon': 'fa fa-cube',
+                            'url': '/admin/services/service/'
+                        },
+
+                        {
+                            'name': 'Блоки сервисов',
                             'icon': 'fa fa-cubes',
                             'url': '/admin/services/contentblock/'
                         },
@@ -235,11 +259,7 @@ SIMPLEUI_CONFIG = {
                     'icon': 'fa fa-address-book',
                     'url': '/admin/contacts/contact/'
                 },
-                {
-                    'name': 'Видео',
-                    'icon': 'fa fa-list',
-                    'url': '/admin/about_us/video/'
-                },
+
 
 
             ]

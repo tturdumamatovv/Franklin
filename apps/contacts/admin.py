@@ -6,7 +6,7 @@ from .models import (
     SocialLink,
     Phone,
     Email,
-    Application
+    Application, Preload
 )
 
 
@@ -41,3 +41,4 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Application)
+admin.site.register(Preload)
