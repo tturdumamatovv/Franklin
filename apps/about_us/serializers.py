@@ -113,3 +113,4 @@ class VideoSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         return self.context['request'].build_absolute_uri(obj.url.url)
+
