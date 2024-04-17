@@ -11,7 +11,7 @@ from .models import (
     Slide,
     Step,
     AboutServiceImage,
-    Icon
+    Icon, Service
 )
 
 
@@ -121,11 +121,11 @@ class ImagesBlockSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ServicePageSerializer(serializers.ModelSerializer):
+class ServiceSerializer(serializers.ModelSerializer):
     content_blocks = serializers.SerializerMethodField()
 
     class Meta:
-        model = ServicePage
+        model = Service
         fields = '__all__'
 
     def get_content_blocks(self, obj):
@@ -148,3 +148,12 @@ class ServicePageSerializer(serializers.ModelSerializer):
                 serializer = ImagesBlockSerializer(block, context={'request': request})
                 blocks.append(serializer.data)
         return blocks
+
+
+class ServicePageSerializer(serializers.ModelSerializer):
+    content_blocks = ServiceSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = ServicePage
+        fields = '__all__'
+

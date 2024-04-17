@@ -22,7 +22,7 @@ from .models import (
     AboutServiceImage,
     Image,
     ImagesBlock,
-    Diagram
+    Diagram, Service
 )
 
 
@@ -136,8 +136,18 @@ class ContentBlockInline(StackedPolymorphicInline):
     )
 
 
-class ServicePageAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
+class ServiceInline(StackedInline):
+    model = Service
+    extra = 0
+
+class ServicePageAdmin(admin.ModelAdmin):
+    inlines = [ServiceInline, ]
+
+
+
+class ServiceAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
     inlines = [ContentBlockInline, ]
+
     class Media:
         css = {
             "all": ("css/admin.css",)
@@ -152,6 +162,7 @@ class ContentBlockAdmin(PolymorphicParentModelAdmin):
 
 
 admin.site.register(ServicePage, ServicePageAdmin)
+admin.site.register(Service, ServiceAdmin)
 admin.site.register(ContentBlock, ContentBlockAdmin)
 admin.site.register(ImagesBlock, ImagesBlockAdmin)
 admin.site.register(SliderBlock, SliderBlockAdmin)
