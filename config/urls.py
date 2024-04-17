@@ -26,9 +26,15 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Your API",
+      title="Franklin API",
       default_version='v1',
-      description="API description",
+      description='''
+      About Page API: Manages content for the About Page.
+      Video APIs: Handles video content for the website.
+      Contact APIs: Provides contact details and handles application submissions.
+      Portfolio APIs: Manages portfolio pages, projects, and durations. 
+      Service Page API: Manages content for the Service Page.
+      ''',
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@yourapi.local"),
       license=openapi.License(name="BSD License"),
