@@ -63,6 +63,6 @@ class Application(models.Model):
 
 
 class Preload(SingletonModel):
-    logo = models.FileField(upload_to='preload_logo')
+    logo = models.FileField(upload_to='preload_logo/')
     image = models.ImageField(upload_to='preload/', verbose_name=_('Изображение'))
     text = models.CharField(max_length=250, verbose_name=_('Текст'))

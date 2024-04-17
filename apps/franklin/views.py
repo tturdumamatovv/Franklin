@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 
 from .serializers import AllPagesSerializer, PreloadSerializer
+from apps.contacts.models import Preload
 
 from rest_framework.response import Response
 
@@ -13,6 +14,7 @@ class AllPagesView(APIView):
 
 class PreloadView(APIView):
     def get(self, request):
-        serializer = PreloadSerializer({})
+        preload_instance = Preload.objects.get()
+        serializer = PreloadSerializer(preload_instance, context={'request': request})
         return Response(serializer.data)
 

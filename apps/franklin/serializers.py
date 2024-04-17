@@ -55,6 +55,11 @@ class AllPagesSerializer(serializers.Serializer):
 
 
 class PreloadSerializer(serializers.ModelSerializer):
+    logo = serializers.SerializerMethodField()
+
     class Meta:
         model = Preload
         fields = '__all__'
+
+    def get_logo(self, obj):
+        return self.context['request'].build_absolute_uri(obj.logo.url)

@@ -5,6 +5,13 @@ from ckeditor.fields import RichTextField
 from polymorphic.models import PolymorphicModel
 
 
+class MetaData(models.Model):
+    keywords = models.CharField(max_length=255, blank=True, null=True)
+    meta_title = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Мета-заголовок'))
+    meta_description = models.TextField(verbose_name=_('Мета-описание'))
+    meta_image = models.FileField(upload_to='meta_images', default='static/icons/LOGO.svg')
+
+
 class SingletonModel(models.Model):
     class Meta:
         abstract = True
@@ -56,8 +63,6 @@ class ImagesBlock(ContentBlock):
     def __str__(self):
         return self.title or self.type
 
-
-
     class Meta:
         verbose_name = _('Блок с картинками')
         verbose_name_plural = _('Блоки с картинками')
@@ -76,7 +81,6 @@ class SliderBlock(ContentBlock):
     type = models.CharField(max_length=20, default='slider', auto_created=True, editable=False)
     duration = models.CharField(max_length=20,choices=(('right', 'right'), ('left', 'left')), blank=True, null=True)
     uppercase = models.BooleanField(default=False)
-
 
     def __str__(self):
         return self.title or self.type
