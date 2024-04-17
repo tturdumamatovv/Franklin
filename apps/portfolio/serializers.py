@@ -19,7 +19,7 @@ class PortfolioDurationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PortfolioDuration
-        fields = ('page', 'name', 'name_en', 'name_ru', 'image',)
+        fields = ('id', 'page', 'name', 'name_en', 'name_ru', 'image',)
 
 
 class PortfolioImageSerializer(serializers.ModelSerializer):

@@ -151,7 +151,7 @@ class ServiceSerializer(serializers.ModelSerializer):
 
 
 class ServicePageSerializer(serializers.ModelSerializer):
-    content_blocks = ServiceSerializer(many=True, read_only=True)
+    services = ServiceSerializer(many=True, read_only=True)
 
     class Meta:
         model = ServicePage
