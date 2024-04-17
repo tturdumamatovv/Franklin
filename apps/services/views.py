@@ -12,5 +12,5 @@ class ServicePageAPIView(generics.ListAPIView):
 class ServiceAPIView(generics.RetrieveAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-    lookup_field = 'id'
+    lookup_field = 'slug'
 
