@@ -32,7 +32,7 @@ class PortfolioImageSerializer(serializers.ModelSerializer):
 class PortfolioDurationForProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortfolioDuration
-        fields = ('name', 'slug')
+        fields = ('name', 'name_en', 'name_ru', 'slug')
 
 
 class PortfolioProjectSerializer(serializers.ModelSerializer):
