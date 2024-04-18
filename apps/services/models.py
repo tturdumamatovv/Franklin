@@ -74,7 +74,7 @@ class IconsBlock(ContentBlock):
 
 
 class Icon(models.Model):
-    image = models.ImageField(upload_to='icon/', verbose_name=_('Изображение'))
+    image = models.FileField(upload_to='icon/', verbose_name=_('Изображение'))
     title = models.CharField(max_length=30, verbose_name=_('Заголовок'), blank=True, null=True)
     sub_title = models.CharField(max_length=50, verbose_name=_('Подзаголовок'), blank=True, null=True)
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
