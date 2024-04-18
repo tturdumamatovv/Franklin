@@ -147,9 +147,8 @@ class Step(models.Model):
 
 class AboutService(ContentBlock):
     type = models.CharField(max_length=20, default='equipment', auto_created=True, editable=False)
-    sub_title = models.CharField(max_length=150, verbose_name=_('Подзаголовок'))
-    sub_sub_title = models.CharField(max_length=150, verbose_name=_('Под-подзаголовок'))
-    bonus = models.CharField(max_length=150, verbose_name=_('Бонус'))
+    sub_title = models.CharField(max_length=150, verbose_name=_('Подзаголовок'), null=True, blank=True)
+    bonus = models.CharField(max_length=150, verbose_name=_('Бонус'), null=True, blank=True)
 
     class Meta:
         verbose_name = 'О сервисе'

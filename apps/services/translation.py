@@ -50,7 +50,7 @@ class StepTranslationOptions(TranslationOptions):
 
 @register(AboutService)
 class AboutServiceTranslationOptions(TranslationOptions):
-    fields = ('sub_title', 'sub_sub_title', 'bonus',)
+    fields = ('sub_title', 'bonus',)
 
 
 @register(Diagram)
