@@ -24,6 +24,9 @@ class Service(models.Model):
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
     image = models.ImageField(upload_to='services/', verbose_name=_('Изображение'))
 
+    def __str__(self):
+        return self.title or f'сервис {self.id}'
+
 
 class ContentBlock(PolymorphicModel):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='content_blocks',

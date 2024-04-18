@@ -9,6 +9,7 @@ from polymorphic.admin import (
     PolymorphicChildModelAdmin
 )
 
+from .filters import ServiceFilter
 from .models import (
     ServicePage,
     ContentBlock,
@@ -154,12 +155,12 @@ class ServiceAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
         }
 
 
-
 class ContentBlockAdmin(PolymorphicParentModelAdmin):
     base_model = ContentBlock
     child_models = (ImagesBlock, SliderBlock, IconsBlock, AboutService, StepBlock, Diagram)
     list_editable = ('order',)
-    list_display = ('id', 'title', 'description', 'order')
+    list_display = ('id', 'title', 'description', 'service', 'order')
+    list_filter = (ServiceFilter,)
 
 
 admin.site.register(ServicePage, ServicePageAdmin)
