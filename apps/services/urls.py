@@ -3,5 +3,5 @@ from .views import ServicePageAPIView, ServiceAPIView
 
 urlpatterns = [
     path('service-page/', ServicePageAPIView.as_view(), name='service-page'),
-    path('service/<int:id>/', ServiceAPIView.as_view(), name='service'),
+    path('service/<str:slug>/', ServiceAPIView.as_view(), name='service'),
 ]

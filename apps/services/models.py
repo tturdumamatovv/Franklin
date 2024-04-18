@@ -1,7 +1,10 @@
-from ckeditor.fields import RichTextField
 from django.db import models
-from polymorphic.models import PolymorphicModel
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import slugify
+
+from polymorphic.models import PolymorphicModel
+from ckeditor.fields import RichTextField
+from unidecode import unidecode
 
 from apps.about_us.models import SingletonModel
 
@@ -23,6 +26,21 @@ class Service(models.Model):
                              verbose_name=_('Страница'))
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
     image = models.ImageField(upload_to='services/', verbose_name=_('Изображение'))
+    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(unidecode(self.title))
+            unique_slug = base_slug
+            counter = 1
+
+            while Service.objects.filter(slug=unique_slug).exists():
+                unique_slug = f"{base_slug}-{counter}"
+                counter += 1
+
+            self.slug = unique_slug
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title or f'сервис {self.id}'
