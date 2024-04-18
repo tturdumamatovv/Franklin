@@ -5,14 +5,12 @@ from ckeditor.fields import RichTextField
 from polymorphic.models import PolymorphicModel
 
 
-class MetaData(models.Model):
-    keywords = models.CharField(max_length=255, blank=True, null=True)
-    meta_title = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Мета-заголовок'))
-    meta_description = models.TextField(verbose_name=_('Мета-описание'))
-    meta_image = models.FileField(upload_to='meta_images', default='static/icons/LOGO.svg')
-
 
 class SingletonModel(models.Model):
+    keywords = models.CharField(max_length=255, blank=True, null=True)
+    meta_title = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-заголовок'))
+    meta_description = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-описание'))
+    meta_image = models.FileField(upload_to='meta_images', blank=True, null=True, default='static/icons/LOGO.svg')
     class Meta:
         abstract = True
 

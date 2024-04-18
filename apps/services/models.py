@@ -28,6 +28,11 @@ class Service(models.Model):
     image = models.ImageField(upload_to='services/', verbose_name=_('Изображение'))
     slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
 
+    keywords = models.CharField(max_length=255, blank=True, null=True)
+    meta_title = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-заголовок'))
+    meta_description = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-описание'))
+    meta_image = models.FileField(upload_to='meta_images', blank=True, null=True, default='static/icons/LOGO.svg')
+
     def save(self, *args, **kwargs):
         if not self.slug:
             base_slug = slugify(unidecode(self.title))
@@ -125,8 +130,8 @@ class StepBlock(ContentBlock):
         return self.title
 
     class Meta:
-        verbose_name = _('Блок со слайдером')
-        verbose_name_plural = _('Блоки со слайдером')
+        verbose_name = _('Блоки с этапами')
+        verbose_name_plural = _('Блоки с этапами')
 
 
 class Step(models.Model):
@@ -136,8 +141,8 @@ class Step(models.Model):
     block = models.ForeignKey(StepBlock, on_delete=models.CASCADE, related_name='steps')
 
     class Meta:
-        verbose_name = _('Слайд')
-        verbose_name_plural = _('Слайды')
+        verbose_name = _('Этап')
+        verbose_name_plural = _('Этапы')
 
 
 class AboutService(ContentBlock):
