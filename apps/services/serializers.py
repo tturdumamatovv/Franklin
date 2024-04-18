@@ -11,7 +11,7 @@ from .models import (
     Slide,
     Step,
     AboutServiceImage,
-    Icon, Service
+    Icon, Service, Diagram
 )
 
 
@@ -124,6 +124,13 @@ class ImagesBlockSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class DiagramSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Diagram
+        fields = '__all__'
+
+
 class ServiceSerializer(serializers.ModelSerializer):
     content_blocks = serializers.SerializerMethodField()
 
@@ -149,6 +156,9 @@ class ServiceSerializer(serializers.ModelSerializer):
                 blocks.append(serializer.data)
             elif isinstance(block, ImagesBlock):
                 serializer = ImagesBlockSerializer(block, context={'request': request})
+                blocks.append(serializer.data)
+            elif isinstance(block, Diagram):
+                serializer = DiagramSerializer(block, context={'request': request})
                 blocks.append(serializer.data)
         return blocks
 
