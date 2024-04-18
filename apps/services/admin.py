@@ -161,6 +161,7 @@ class ContentBlockAdmin(PolymorphicParentModelAdmin):
     list_editable = ('order',)
     list_display = ('id', 'title', 'description', 'service', 'order')
     list_filter = (ServiceFilter,)
+    save_as = True
 
 
 admin.site.register(ServicePage, ServicePageAdmin)
