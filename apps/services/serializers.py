@@ -39,10 +39,11 @@ class SlideSerializer(serializers.ModelSerializer):
 
     def get_image(self, obj):
         request = self.context.get('request')
-        if request is not None:
-            return request.build_absolute_uri(obj.image.url)
-        else:
+        if obj.image and hasattr(obj.image, 'url'):
+            if request is not None:
+                return request.build_absolute_uri(obj.image.url)
             return obj.image.url
+        return None
 
 
 class StepSerializer(serializers.ModelSerializer):
@@ -54,10 +55,11 @@ class StepSerializer(serializers.ModelSerializer):
 
     def get_image(self, obj):
         request = self.context.get('request')
-        if request is not None:
-            return request.build_absolute_uri(obj.image.url)
-        else:
+        if obj.image and hasattr(obj.image, 'url'):
+            if request is not None:
+                return request.build_absolute_uri(obj.image.url)
             return obj.image.url
+        return None
 
 
 class AboutServiceImageSerializer(serializers.ModelSerializer):
@@ -75,10 +77,11 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def get_image(self, obj):
         request = self.context.get('request')
-        if request is not None:
-            return request.build_absolute_uri(obj.image.url)
-        else:
+        if obj.image and hasattr(obj.image, 'url'):
+            if request is not None:
+                return request.build_absolute_uri(obj.image.url)
             return obj.image.url
+        return None
 
 
 class IconsBlockSerializer(serializers.ModelSerializer):

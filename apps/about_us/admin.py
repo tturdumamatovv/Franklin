@@ -87,14 +87,9 @@ class ContentBlockInline(StackedPolymorphicInline):
         IconsBlockInline,
     )
 
-
+@admin.register(AboutPage)
 class AboutPageAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
     inlines = [ContentBlockInline, ]
-
-    class Media:
-        css = {
-            "all": ("css/admin.css",)
-        }
 
 
 class ContentBlockAdmin(PolymorphicParentModelAdmin):
@@ -105,7 +100,8 @@ class ContentBlockAdmin(PolymorphicParentModelAdmin):
 
 
 
-admin.site.register(AboutPage, AboutPageAdmin)
+
+
 admin.site.register(ContentBlock, ContentBlockAdmin)
 admin.site.register(ImagesBlock, ImagesBlockAdmin)
 admin.site.register(SliderBlock, SliderBlockAdmin)
