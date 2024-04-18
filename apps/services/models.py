@@ -184,11 +184,12 @@ class Image(models.Model):
 
 
 class Diagram(ContentBlock):
-    first_field = models.CharField(max_length=150, verbose_name=_('Первое поле'))
-    second_field = models.CharField(max_length=150, verbose_name=_('Второе поле'))
-    third_field = models.CharField(max_length=150, verbose_name=_('Треье поле'))
-    result_field = models.CharField(max_length=150, verbose_name=_('Результат'))
-    type = 'diagram'
+    type = models.CharField(max_length=20, default='offer', auto_created=True, editable=False)
+
+    first_field = models.CharField(max_length=150, verbose_name=_('Верхнее поле'))
+    second_field = models.CharField(max_length=150, verbose_name=_('Правое поле'))
+    third_field = models.CharField(max_length=150, verbose_name=_('Левое поле'))
+    result_field = models.CharField(max_length=150, verbose_name=_('Центральное поле'))
 
     class Meta:
         verbose_name = _('Диаграмма')
