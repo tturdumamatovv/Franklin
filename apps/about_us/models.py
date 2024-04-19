@@ -141,3 +141,7 @@ class Video(models.Model):
 
 class SiteInfo(SingletonModel):
     technical_works = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = _('Информация о сайте')
+        verbose_name_plural = _('Информация о сайте')

@@ -122,7 +122,7 @@ class VideoSerializer(serializers.ModelSerializer):
 class SiteInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = SiteInfo
-        fields = ['keywords', 'meta_title', 'meta_description', 'meta_image', 'technical_works']
+        fields = ['technical_works', 'keywords', 'meta_title', 'meta_description', 'meta_image']
 
 
     def to_representation(self, instance):
