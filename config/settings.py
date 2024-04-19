@@ -173,10 +173,16 @@ SIMPLEUI_DEFAULT_THEME = 'simpleui.css'
 SIMPLEUI_INDEX = '#'
 SIMPLEUI_LOGO = '/static/icons/LOGO.svg'
 SIMPLEUI_CONFIG = {
-    'system_keep': False,
+    'system_keep': True,
     'menus': [
+        {
+            'name': 'О сайте',
+            'icon': 'fa fa-database',
+            'url': '/admin/about_us/siteinfo/'
+        },
 
         {
+
             'name': 'Страницы',
             'icon': 'fa fa-book',
             'models': [

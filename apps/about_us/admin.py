@@ -18,7 +18,8 @@ from .models import (
     Slide,
     Icon,
     IconsBlock,
-    Video
+    Video,
+    SiteInfo
 )
 
 
@@ -107,4 +108,5 @@ admin.site.register(ImagesBlock, ImagesBlockAdmin)
 admin.site.register(SliderBlock, SliderBlockAdmin)
 admin.site.register(IconsBlock, IconsBlockAdmin)
 admin.site.register(Video)
+admin.site.register(SiteInfo)
 

@@ -32,7 +32,8 @@ class VideoPreload(APIView):
 
 class SiteInfoAPIView(APIView):
     def get(self, request):
-        info = SiteInfo.objects.all()
+        info_list = SiteInfo.objects.all()
+        info = info_list[0]
         is_admin = request.user.is_staff
 
         serializer = SiteInfoSerializer(info, context={'is_admin': is_admin})
