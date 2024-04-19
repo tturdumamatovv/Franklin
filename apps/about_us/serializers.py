@@ -8,7 +8,8 @@ from .models import (
     Slide,
     IconsBlock,
     Icon,
-    Video
+    Video,
+    SiteInfo
 )
 
 
@@ -117,3 +118,15 @@ class VideoSerializer(serializers.ModelSerializer):
     def get_url(self, obj):
         return self.context['request'].build_absolute_uri(obj.url.url)
 
+
+class SiteInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SiteInfo
+        fields = ['keywords', 'meta_title', 'meta_description', 'meta_image', 'technical_works']
+
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        is_admin = self.context.get('is_admin', False)
+        data['is_admin'] = is_admin
+        return data
