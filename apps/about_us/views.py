@@ -2,8 +2,8 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import AboutPage, Video, Image
-from .serializers import AboutPageSerializer, VideoSerializer
+from .models import AboutPage, Video, Image, SiteInfo
+from .serializers import AboutPageSerializer, VideoSerializer, SiteInfoSerializer
 
 
 class AboutPageAPIView(generics.ListAPIView):
@@ -27,4 +27,14 @@ class VideoPreload(APIView):
     def get(self, request):
         video = Video.objects.filter(preload=True).first()
         serializer = VideoSerializer(video, context={'request': request})
+        return Response(serializer.data)
+
+
+class SiteInfoAPIView(APIView):
+    def get(self, request):
+        info = SiteInfo.objects.all()
+        is_admin = request.user.is_staff
+
+        serializer = SiteInfoSerializer(info, context={'is_admin': is_admin})
+
         return Response(serializer.data)
