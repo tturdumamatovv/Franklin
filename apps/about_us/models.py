@@ -141,6 +141,7 @@ class Video(models.Model):
 
 class SiteInfo(SingletonModel):
     technical_works = models.BooleanField(default=False)
+    site_password = models.CharField(max_length=10, null=True, blank=True)
 
     class Meta:
         verbose_name = _('Информация о сайте')

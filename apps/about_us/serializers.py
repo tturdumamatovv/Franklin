@@ -120,13 +120,16 @@ class VideoSerializer(serializers.ModelSerializer):
 
 
 class SiteInfoSerializer(serializers.ModelSerializer):
+    meta_image = serializers.SerializerMethodField()
+
     class Meta:
         model = SiteInfo
-        fields = ['technical_works', 'keywords', 'meta_title', 'meta_description', 'meta_image']
+        fields = ['technical_works', 'keywords', 'meta_title', 'meta_description', 'meta_image', 'site_password']
 
-
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        is_admin = self.context.get('is_admin', False)
-        data['is_admin'] = is_admin
-        return data
+    def get_meta_image(self, obj):
+        request = self.context.get('request')
+        if obj.meta_image and hasattr(obj.meta_image, 'url'):
+            if request is not None:
+                return request.build_absolute_uri(obj.meta_image.url)
+            return obj.meta_image.url
+        return None
