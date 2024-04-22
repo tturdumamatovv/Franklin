@@ -8,18 +8,23 @@ from .models import (
 )
 
 
-class MainPagePortfolioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PortfolioPage
-        fields = ('title', 'sub_title')
-
-
 class PortfolioDurationSerializer(serializers.ModelSerializer):
-    page = MainPagePortfolioSerializer()
 
     class Meta:
         model = PortfolioDuration
         fields = ('slug', 'page', 'name', 'name_en', 'name_ru', 'image',)
+
+
+class MainPagePortfolioSerializer(serializers.ModelSerializer):
+    durations = PortfolioDurationSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = PortfolioPage
+        fields = ('title', 'sub_title', 'durations')
+
+
+
+
 
 
 class PortfolioImageSerializer(serializers.ModelSerializer):
