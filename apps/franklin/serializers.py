@@ -1,14 +1,13 @@
 from rest_framework import serializers
 
+from apps.about_us.serializers import AboutPageSerializer
 from apps.contacts.models import Preload
+from apps.contacts.serializers import ContactSerializer
+from apps.portfolio.models import PortfolioDuration
+from apps.portfolio.serializers import PortfolioDurationSerializer
 from apps.services.models import ServicePage
 from apps.contacts.models import Contact
 from apps.about_us.models import AboutPage
-
-
-from apps.about_us.serializers import AboutPageSerializer
-from apps.contacts.serializers import ContactSerializer
-from apps.portfolio.serializers import PortfolioPage, PortfolioDurationSerializer
 from apps.services.serializers import ServicePageSerializer
 
 
@@ -23,7 +22,7 @@ class AllPagesSerializer(serializers.Serializer):
         return AboutPageSerializer(instance, context=self.context).data if instance else None
 
     def get_portfolio_page(self, obj):
-        instance = PortfolioPage.objects.first()
+        instance = PortfolioDuration.objects.first()
         return PortfolioDurationSerializer(instance, context=self.context).data if instance else None
 
     def get_service_page(self, obj):
@@ -33,7 +32,6 @@ class AllPagesSerializer(serializers.Serializer):
     def get_contact_page(self, obj):
         instance = Contact.objects.first()
         return ContactSerializer(instance, context=self.context).data if instance else None
-
 
 
 class PreloadSerializer(serializers.ModelSerializer):
