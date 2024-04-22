@@ -20,7 +20,7 @@ class MainPagePortfolioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PortfolioPage
-        fields = ('title', 'sub_title', 'durations')
+        fields = '__all__'
 
 
 
