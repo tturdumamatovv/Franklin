@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 class AllPagesView(APIView):
     def get(self, request):
-        serializer = AllPagesSerializer({})
+        serializer = AllPagesSerializer(instance={}, context={'request': request})
         return Response(serializer.data)
 
 
