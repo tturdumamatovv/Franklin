@@ -290,4 +290,3 @@ CKEDITOR_CONFIGS = {
         'entities_greek': False,
         'basicEntities': False,
     },
-}
