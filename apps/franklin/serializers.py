@@ -8,7 +8,9 @@ from apps.portfolio.serializers import MainPagePortfolioSerializer
 from apps.services.models import ServicePage
 from apps.contacts.models import Contact
 from apps.about_us.models import AboutPage
-from apps.services.serializers import ServicePageSerializer
+
+
+
 
 
 class AllPagesSerializer(serializers.Serializer):
@@ -32,6 +34,7 @@ class AllPagesSerializer(serializers.Serializer):
     def get_contact_page(self, obj):
         instance = Contact.objects.first()
         return ContactSerializer(instance, context=self.context).data if instance else None
+
 
 
 class PreloadSerializer(serializers.ModelSerializer):
