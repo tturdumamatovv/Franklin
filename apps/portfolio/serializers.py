@@ -23,10 +23,6 @@ class MainPagePortfolioSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
-
-
-
 class PortfolioImageSerializer(serializers.ModelSerializer):
 
     class Meta:
