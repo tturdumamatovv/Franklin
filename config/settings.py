@@ -282,3 +282,12 @@ SIMPLEUI_CONFIG = {
 
     ]
 }
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'entities': False,
+        'entities_latin': False,
+        'entities_greek': False,
+        'basicEntities': False,
+    },
+}
