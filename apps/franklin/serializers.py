@@ -8,8 +8,8 @@ from apps.about_us.models import AboutPage
 
 from apps.about_us.serializers import AboutPageSerializer
 from apps.contacts.serializers import ContactSerializer
-from apps.portfolio.serializers import PortfolioPage, PortfolioDurationSerializer
-from apps.services.serializers import ServiceSerializer, ServicePageSerializer
+from apps.portfolio.serializers import PortfolioDurationSerializer
+from apps.services.serializers import ServicePageSerializer
 
 
 class AllPagesSerializer(serializers.Serializer):
