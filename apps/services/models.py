@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
@@ -55,7 +56,7 @@ class ContentBlock(PolymorphicModel):
                              verbose_name=_('Сервис'))
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
     title = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Заголовок'))
-    description = models.TextField(blank=True, null=True, verbose_name=_('Описание'))
+    description = RichTextField(blank=True, null=True, verbose_name=_('Описание'))
 
     class Meta:
         ordering = ['order']
