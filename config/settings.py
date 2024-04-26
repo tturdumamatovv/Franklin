@@ -289,5 +289,8 @@ CKEDITOR_CONFIGS = {
         'entities_latin': False,
         'entities_greek': False,
         'basicEntities': False,
+        'extraPlugins': '',
+        'removePlugins': 'all',
+        'toolbar': [],
     },
 }
