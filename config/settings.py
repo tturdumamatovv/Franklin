@@ -294,3 +294,4 @@ CKEDITOR_CONFIGS = {
         'toolbar': [],
     },
 }
+
