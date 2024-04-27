@@ -23,7 +23,7 @@ class AllPagesSerializer(serializers.Serializer):
         return AboutPageSerializer(instance, context=self.context).data if instance else None
 
     def get_portfolio_page(self, obj):
-        instance = PortfolioDuration.objects.first()
+        instance = PortfolioPage.objects.first()
         return MainPagePortfolioSerializer(instance, context=self.context).data if instance else None
 
     def get_service_page(self, obj):
