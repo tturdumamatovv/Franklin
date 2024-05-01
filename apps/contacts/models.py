@@ -55,7 +55,7 @@ class SocialLink(models.Model):
 class Application(models.Model):
     name = models.CharField(max_length=120, verbose_name=_('Имя'))
     phone = models.CharField(max_length=100, verbose_name=_("Номер телефона"))
-    message = models.TextField(verbose_name=_('Сообщение'))
+    message = models.TextField(verbose_name=_('Сообщение'), blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
