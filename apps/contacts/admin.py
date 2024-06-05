@@ -44,6 +44,7 @@ class ContactAdmin(admin.ModelAdmin):
 class ApplicationAdmin(admin.ModelAdmin):
     fields = ['name', 'phone', 'message', 'created_at']
     readonly_fields = ['name', 'phone', 'message', 'created_at']
+    list_display = ['name', 'phone', 'message']
 
 
 admin.site.register(Preload)

@@ -7,9 +7,11 @@ from apps.about_us.models import SingletonModel
 class Contact(SingletonModel):
     title = models.CharField(max_length=120, verbose_name=_('Заголовок'))
     sub_title = models.CharField(max_length=200, verbose_name=_('Подзаголовок'), blank=True, null=True)
-    pop_message = models.CharField(max_length=200, blank=True, null=True)
-    pop_icon = models.FileField(upload_to='pip_icon', blank=True, null=True)
-    pop_title = models.CharField(max_length=200, blank=True, null=True)
+    pop_message = models.CharField(max_length=200, blank=True, null=True, verbose_name=_("Всплывающие сообщение"))
+    pop_icon = models.FileField(upload_to='pip_icon', blank=True, null=True
+                                , verbose_name=_("Иконка всплывающего сообщения"))
+    pop_title = models.CharField(max_length=200, blank=True, null=True
+                                 , verbose_name=_("Заголовок всплывающего сообщения"))
 
     class Meta:
         verbose_name = _('Страница "Контакты"')
@@ -26,6 +28,10 @@ class Address(models.Model):
     def __str__(self):
         return self.address
 
+    class Meta:
+        verbose_name = _('Адрес')
+        verbose_name_plural = _('Адреса')
+
 
 class Phone(models.Model):
     phone = models.CharField(max_length=200, verbose_name=_('Телефон'))
@@ -34,6 +40,10 @@ class Phone(models.Model):
     def __str__(self):
         return self.phone
 
+    class Meta:
+        verbose_name = _('Телефон')
+        verbose_name_plural = _('Телефоны')
+
 
 class Email(models.Model):
     email = models.EmailField(max_length=200, verbose_name=_('Электронная почта'))
@@ -41,6 +51,10 @@ class Email(models.Model):
 
     def __str__(self):
         return self.email
+
+    class Meta:
+        verbose_name = _('Почта')
+        verbose_name_plural = _('Почты')
 
 
 class SocialLink(models.Model):
@@ -51,15 +65,20 @@ class SocialLink(models.Model):
     def __str__(self):
         return f'{self.link}' or 'Social Link'
 
+    class Meta:
+        verbose_name = _('Социальная сеть')
+        verbose_name_plural = _('Социальные сети')
+
 
 class Application(models.Model):
     name = models.CharField(max_length=120, verbose_name=_('Имя'))
     phone = models.CharField(max_length=100, verbose_name=_("Номер телефона"))
     message = models.TextField(verbose_name=_('Сообщение'), blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=_("Дата заявки"))
 
-    def __str__(self):
-        return self.name
+    class Meta:
+        verbose_name = _('Заявка')
+        verbose_name_plural = _('Заявки')
 
 
 class Preload(SingletonModel):

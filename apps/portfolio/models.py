@@ -8,7 +8,7 @@ from apps.about_us.models import SingletonModel
 
 
 class PortfolioPage(SingletonModel):
-    title = models.CharField(max_length=200, verbose_name=_('Загловок'))
+    title = models.CharField(max_length=200, verbose_name=_('Заголовок'))
     sub_title = models.CharField(max_length=200, verbose_name=_('Подзаголовок'), blank=True, null=True)
 
     class Meta:
@@ -20,8 +20,9 @@ class PortfolioPage(SingletonModel):
 
 
 class PortfolioDuration(models.Model):
-    page = models.ForeignKey(PortfolioPage, related_name='durations', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='portfolio_duration/')
+    page = models.ForeignKey(PortfolioPage, related_name='durations', on_delete=models.CASCADE
+                             , verbose_name=_("Страница"))
+    image = models.ImageField(upload_to='portfolio_duration/', verbose_name=_("Изображение"))
     name = models.CharField(max_length=150, verbose_name=_('Название'))
     slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
 
@@ -42,9 +43,15 @@ class PortfolioDuration(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _('Направление проекта')
+        verbose_name_plural = _('Направление проектов')
+
+
 
 class PortfolioProject(models.Model):
-    duration = models.ForeignKey(PortfolioDuration, related_name='projects', on_delete=models.CASCADE)
+    duration = models.ForeignKey(PortfolioDuration, related_name='projects', on_delete=models.CASCADE
+                                 , verbose_name=_("Направление"))
     title = models.CharField(max_length=150, verbose_name=_('Заголовок'))
     description = models.TextField(verbose_name=_('Описание'), blank=True, null=True)
     location = models.CharField(max_length=150, verbose_name=_('Локация'))
@@ -71,10 +78,18 @@ class PortfolioProject(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = _('Портфолио проекта')
+        verbose_name_plural = _('Портфолио проектов')
+
 
 class PortfolioImage(models.Model):
     project = models.ForeignKey(PortfolioProject, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='portfolio_projects/')
+    image = models.ImageField(upload_to='portfolio_projects/', verbose_name=_("Изображение"))
 
     def __str__(self):
-        return f"Image for {self.project.title}"
+        return f"Изображение для - {self.project.title}"
+
+    class Meta:
+        verbose_name = _('Изображения портфолио')
+        verbose_name_plural = _('Изображении портфолио')

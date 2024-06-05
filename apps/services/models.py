@@ -50,6 +50,11 @@ class Service(models.Model):
     def __str__(self):
         return self.title or f'сервис {self.id}'
 
+    class Meta:
+        verbose_name = _('Сервис')
+        verbose_name_plural = _('Сервисы')
+
+
 
 class ContentBlock(PolymorphicModel):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='content_blocks',
@@ -91,8 +96,12 @@ class Icon(models.Model):
         verbose_name_plural = _('Иконки')
 
 
+    def __str__(self):
+        return self.block.title
+
+
 class SliderBlock(ContentBlock):
-    duration = models.CharField(max_length=20,choices=(('right', 'right'), ('left', 'left')), blank=True, null=True)
+    duration = models.CharField(max_length=20, choices=(('right', 'right'), ('left', 'left')), blank=True, null=True)
     uppercase = models.BooleanField(default=False)
     type = models.CharField(max_length=10, default='slider', auto_created=True, editable=False)
 
@@ -120,6 +129,10 @@ class Slide(models.Model):
     class Meta:
         verbose_name = _('Слайд')
         verbose_name_plural = _('Слайды')
+
+
+    def __str__(self):
+        return self.block.title
 
 
 class StepBlock(ContentBlock):
@@ -180,6 +193,9 @@ class Image(models.Model):
     class Meta:
         verbose_name = _('Картинка')
         verbose_name_plural = _('Картинки')
+
+    def __str__(self):
+        return self.block.title
 
 
 class Diagram(ContentBlock):

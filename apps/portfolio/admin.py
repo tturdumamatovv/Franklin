@@ -38,12 +38,14 @@ class PortfolioDurationInline(NestedBaseInline):
 
 @admin.register(PortfolioPage)
 class PortfolioPageAdmin(BaseAdmin):
-    inlines = [PortfolioDurationInline, ]
+    # inlines = [PortfolioDurationInline, ]
+    pass
 
 
 @admin.register(PortfolioDuration)
 class PortfolioDurationAdmin(BaseAdmin):
-    inlines = [PortfolioProjectInline, ]
+    # inlines = [PortfolioProjectInline, ]
+    pass
 
 
 @admin.register(PortfolioProject)

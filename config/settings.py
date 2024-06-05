@@ -186,29 +186,29 @@ SIMPLEUI_CONFIG = {
             'name': 'Страницы',
             'icon': 'fa fa-book',
             'models': [
-                {
-                    'name': 'Preload',
-                    'icon': 'fa fa-download',
-                    'models': [
-                        {
-                            'name': 'Страница Preload',
-                            'icon': 'fa fa-download',
-                            'url': '/admin/contacts/preload/'
-                        },
-                        {
-                            'name': 'Видео',
-                            'icon': 'fa fa-video',
-                            'url': '/admin/about_us/video/'
-                        },
-
-                    ]
-                },
+                # {
+                #     'name': 'Preload',
+                #     'icon': 'fa fa-download',
+                #     'models': [
+                #         {
+                #             'name': 'Страница Preload',
+                #             'icon': 'fa fa-download',
+                #             'url': '/admin/contacts/preload/'
+                #         },
+                #         {
+                #             'name': 'Видео',
+                #             'icon': 'fa fa-video',
+                #             'url': '/admin/about_us/video/'
+                #         },
+                #
+                #     ]
+                # },
                 {
                     'name': 'О нас',
                     'icon': 'fa fa-info-circle',
                     'models': [
                         {
-                            'name': 'Страница AboutUs',
+                            'name': 'Страница О нас',
                             'icon': 'fa fa-file-text',
                             'url': '/admin/about_us/aboutpage/'
                         },
@@ -225,7 +225,7 @@ SIMPLEUI_CONFIG = {
                     'icon': 'fa fa-folder',
                     'models': [
                         {
-                            'name': 'Страница Portfolio',
+                            'name': 'Страница Портфолио',
                             'icon': 'fa fa-file-text',
                             'url': '/admin/portfolio/portfoliopage/'
                         },
@@ -246,12 +246,12 @@ SIMPLEUI_CONFIG = {
                     'icon': 'fa fa-user',
                     'models': [
                         {
-                            'name': 'Страница Services',
+                            'name': 'Страница Услуг',
                             'icon': 'fa fa-file-text',
                             'url': '/admin/services/servicepage/'
                         },
                         {
-                            'name': 'Сервисы',
+                            'name': 'Услуги',
                             'icon': 'fa fa-cube',
                             'url': '/admin/services/service/'
                         },
