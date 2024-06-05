@@ -3,8 +3,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class ServiceFilter(admin.SimpleListFilter):
-    title = _('service')
-    parameter_name = 'service'
+    title = _('Сервис')
+    parameter_name = 'Сервис'
 
     def lookups(self, request, model_admin):
         services = set([cb.service for cb in model_admin.model.objects.exclude(service__isnull=True)])

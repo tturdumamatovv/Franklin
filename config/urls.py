@@ -36,7 +36,7 @@ schema_view = get_schema_view(
       Service Page API: Manages content for the Service Page.
       ''',
       terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@yourapi.local"),
+      contact=openapi.Contact(email="contact@yourapi.locale"),
       license=openapi.License(name="BSD License"),
    ),
    public=True,

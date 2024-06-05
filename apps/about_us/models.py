@@ -6,7 +6,7 @@ from polymorphic.models import PolymorphicModel
 
 
 class SingletonModel(models.Model):
-    keywords = models.CharField(max_length=255, blank=True, null=True)
+    keywords = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Ключевые слова"))
     meta_title = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-заголовок'))
     meta_description = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-описание'))
     meta_image = models.FileField(upload_to='meta_images', blank=True, null=True, default='static/icons/LOGO.svg')
@@ -67,18 +67,22 @@ class ImagesBlock(ContentBlock):
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to='about_page')
+    image = models.ImageField(upload_to='about_page', verbose_name=_("Картинка"))
     block = models.ForeignKey(ImagesBlock, on_delete=models.CASCADE, related_name='images')
 
     class Meta:
         verbose_name = _('Картинка')
         verbose_name_plural = _('Картинки')
 
+    def __str__(self):
+        return self.block.title_ru
+
 
 class SliderBlock(ContentBlock):
     type = models.CharField(max_length=20, default='slider', auto_created=True, editable=False)
-    duration = models.CharField(max_length=20,choices=(('right', 'right'), ('left', 'left')), blank=True, null=True)
-    uppercase = models.BooleanField(default=False)
+    duration = models.CharField(max_length=20, choices=(('right', 'right'), ('left', 'left')), blank=True, null=True
+                                , verbose_name=_("Направление"))
+    uppercase = models.BooleanField(default=False, verbose_name=_("Верхний регистр"))
 
     def __str__(self):
         return self.title or self.type
@@ -98,12 +102,15 @@ class SliderBlock(ContentBlock):
 
 
 class Slide(models.Model):
-    image = models.ImageField(upload_to='about_slide')
+    image = models.ImageField(upload_to='about_slide', verbose_name=_("Картинки"))
     block = models.ForeignKey(SliderBlock, on_delete=models.CASCADE, related_name='slides')
 
     class Meta:
         verbose_name = _('Слайд')
         verbose_name_plural = _('Слайды')
+
+    def __str__(self):
+        return self.block.title_ru
 
 
 class IconsBlock(ContentBlock):
@@ -119,8 +126,8 @@ class IconsBlock(ContentBlock):
 
 class Icon(models.Model):
     image = models.FileField(upload_to='icons/')
-    title = models.CharField(max_length=30)
-    sub_title = models.CharField(max_length=50, blank=True, null=True)
+    title = models.CharField(max_length=30, verbose_name=_("Заголовок"))
+    sub_title = models.CharField(max_length=50, blank=True, null=True, verbose_name=_("Подзаголовок"))
     order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name=_('Порядок'))
     block = models.ForeignKey(IconsBlock, on_delete=models.CASCADE, related_name='icons')
 
@@ -128,6 +135,9 @@ class Icon(models.Model):
         ordering = ['order']
         verbose_name = _('Иконка')
         verbose_name_plural = _('Иконки')
+
+    def __str__(self):
+        return self.block.title_ru
 
 
 class Video(models.Model):

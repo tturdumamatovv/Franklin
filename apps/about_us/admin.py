@@ -88,9 +88,11 @@ class ContentBlockInline(StackedPolymorphicInline):
         IconsBlockInline,
     )
 
+
 @admin.register(AboutPage)
 class AboutPageAdmin(PolymorphicInlineSupportMixin, admin.ModelAdmin):
-    inlines = [ContentBlockInline, ]
+    # inlines = [ContentBlockInline, ]
+    pass
 
 
 class ContentBlockAdmin(PolymorphicParentModelAdmin):

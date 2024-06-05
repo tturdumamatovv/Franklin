@@ -141,8 +141,10 @@ class ServiceInline(StackedInline):
     model = Service
     extra = 0
 
+
 class ServicePageAdmin(admin.ModelAdmin):
-    inlines = [ServiceInline, ]
+    # inlines = [ServiceInline, ]
+    pass
 
 
 
