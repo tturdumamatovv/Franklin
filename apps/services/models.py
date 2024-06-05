@@ -26,12 +26,13 @@ class Service(models.Model):
                              verbose_name=_('Страница'))
     title = models.CharField(max_length=100, verbose_name=_('Заголовок'))
     image = models.ImageField(upload_to='services/', verbose_name=_('Изображение'))
-    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True, verbose_name=_('Слоган[en]'))
 
-    keywords = models.CharField(max_length=255, blank=True, null=True)
+    keywords = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Ключевые слова'))
     meta_title = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-заголовок'))
     meta_description = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-описание'))
-    meta_image = models.FileField(upload_to='meta_images', blank=True, null=True, default='static/icons/LOGO.svg')
+    meta_image = models.FileField(upload_to='meta_images', blank=True, null=True, default='static/icons/LOGO.svg'
+                                  , verbose_name=_('Мета-изображение'))
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -97,11 +98,12 @@ class Icon(models.Model):
 
 
     def __str__(self):
-        return self.block.title
+        return self.block.title_ru
 
 
 class SliderBlock(ContentBlock):
-    duration = models.CharField(max_length=20, choices=(('right', 'right'), ('left', 'left')), blank=True, null=True)
+    duration = models.CharField(max_length=20, choices=(('right', 'справа'), ('left', 'слева')), blank=True, null=True,
+                                verbose_name=_("Направление"))
     uppercase = models.BooleanField(default=False)
     type = models.CharField(max_length=10, default='slider', auto_created=True, editable=False)
 
@@ -132,7 +134,7 @@ class Slide(models.Model):
 
 
     def __str__(self):
-        return self.block.title
+        return self.block.title_ru
 
 
 class StepBlock(ContentBlock):
@@ -195,7 +197,7 @@ class Image(models.Model):
         verbose_name_plural = _('Картинки')
 
     def __str__(self):
-        return self.block.title
+        return self.block.title_ru
 
 
 class Diagram(ContentBlock):

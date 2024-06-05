@@ -55,11 +55,12 @@ class PortfolioProject(models.Model):
     title = models.CharField(max_length=150, verbose_name=_('Заголовок'))
     description = models.TextField(verbose_name=_('Описание'), blank=True, null=True)
     location = models.CharField(max_length=150, verbose_name=_('Локация'))
-    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
-    keywords = models.CharField(max_length=255, blank=True, null=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True, verbose_name=_('Слоган[en]'))
+    keywords = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Ключевые слова'))
     meta_title = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-заголовок'))
     meta_description = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-описание'))
-    meta_image = models.FileField(upload_to='meta_images', blank=True, null=True, default='static/icons/LOGO.svg')
+    meta_image = models.FileField(upload_to='meta_images', blank=True, null=True, default='static/icons/LOGO.svg'
+                                  , verbose_name=_('Мета-изображение'))
 
     def save(self, *args, **kwargs):
         if not self.slug:
