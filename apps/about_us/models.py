@@ -9,7 +9,8 @@ class SingletonModel(models.Model):
     keywords = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Ключевые слова"))
     meta_title = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-заголовок'))
     meta_description = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-описание'))
-    meta_image = models.FileField(upload_to='meta_images', blank=True, null=True, default='static/icons/LOGO.svg')
+    meta_image = models.FileField(upload_to='meta_images', blank=True, null=True, default='static/icons/LOGO.svg'
+                                  , verbose_name=_('Мета-изображение'))
 
     class Meta:
         abstract = True
@@ -80,7 +81,7 @@ class Image(models.Model):
 
 class SliderBlock(ContentBlock):
     type = models.CharField(max_length=20, default='slider', auto_created=True, editable=False)
-    duration = models.CharField(max_length=20, choices=(('right', 'right'), ('left', 'left')), blank=True, null=True
+    duration = models.CharField(max_length=20, choices=(('right', 'справа'), ('left', 'слева')), blank=True, null=True
                                 , verbose_name=_("Направление"))
     uppercase = models.BooleanField(default=False, verbose_name=_("Верхний регистр"))
 
@@ -150,9 +151,12 @@ class Video(models.Model):
 
 
 class SiteInfo(SingletonModel):
-    technical_works = models.BooleanField(default=False)
-    site_password = models.CharField(max_length=10, null=True, blank=True)
+    technical_works = models.BooleanField(default=False, verbose_name=_("Тех обслуживание"))
+    site_password = models.CharField(max_length=10, null=True, blank=True, verbose_name=_("Пароль"))
 
     class Meta:
         verbose_name = _('Информация о сайте')
         verbose_name_plural = _('Информация о сайте')
+
+    def __str__(self):
+        return "Информация о сайте"

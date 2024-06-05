@@ -102,6 +102,9 @@ class ContentBlockAdmin(PolymorphicParentModelAdmin):
     list_display = ('id', 'title', 'description', 'order')
 
 
+@admin.register(SiteInfo)
+class SiteInfoAdmin(admin.ModelAdmin):
+    exclude = ('site_password', 'technical_works')
 
 
 
@@ -110,5 +113,3 @@ admin.site.register(ImagesBlock, ImagesBlockAdmin)
 admin.site.register(SliderBlock, SliderBlockAdmin)
 admin.site.register(IconsBlock, IconsBlockAdmin)
 admin.site.register(Video)
-admin.site.register(SiteInfo)
-

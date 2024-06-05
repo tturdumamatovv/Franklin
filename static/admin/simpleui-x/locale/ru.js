@@ -1,5 +1,6 @@
 var Lanuages = {
     "Refresh": "Обновить",
+    "Delete": "Удалить",
     "Close current": "Закрыть эту вкладку",
     "Close other": "Закрыть другие вкладки",
     "Close all": "Закрыть все вкладки",
