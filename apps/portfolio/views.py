@@ -33,7 +33,7 @@ class PortfolioDurationListView(generics.ListAPIView):
 
 
 class PortfolioProjectListView(generics.ListAPIView):
-    queryset = PortfolioProject.objects.all()
+    queryset = PortfolioProject.objects.all().order_by('order')
     serializer_class = PortfolioProjectListSerializer
 
 

@@ -61,6 +61,7 @@ class PortfolioProject(models.Model):
     meta_description = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Мета-описание'))
     meta_image = models.FileField(upload_to='meta_images', blank=True, null=True, default='static/icons/LOGO.svg'
                                   , verbose_name=_('Мета-изображение'))
+    order = models.IntegerField(default=0, verbose_name=_('Порядок'), blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -82,6 +83,8 @@ class PortfolioProject(models.Model):
     class Meta:
         verbose_name = _('Портфолио проекта')
         verbose_name_plural = _('Портфолио проектов')
+        ordering = ['order']
+
 
 
 class PortfolioImage(models.Model):

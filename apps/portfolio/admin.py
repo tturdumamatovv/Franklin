@@ -1,7 +1,7 @@
 from django.contrib import admin
 import nested_admin
 from django.utils.safestring import mark_safe
-
+from adminsortable2.admin import SortableAdminMixin
 from .models import PortfolioPage, PortfolioDuration, PortfolioProject, PortfolioImage
 
 
@@ -49,5 +49,8 @@ class PortfolioDurationAdmin(BaseAdmin):
 
 
 @admin.register(PortfolioProject)
-class PortfolioProjectAdmin(BaseAdmin):
+class PortfolioProjectAdmin(SortableAdminMixin, BaseAdmin):
+    list_filter = ("duration",)
     inlines = [PortfolioImageInline, ]
+
+
