@@ -5,6 +5,8 @@ services:
   db:
     image: postgres:latest
     restart: always
+    ports:
+      - "5439:5432"
     env_file:
       - .env
     volumes:
@@ -18,6 +20,7 @@ services:
       - ./media:/app/media
     ports:
     - "8012:8012"
+    restart: always
     command: bash -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn config.wsgi:application -w 4 -b 0.0.0.0:8012"
     env_file:
       - .env
