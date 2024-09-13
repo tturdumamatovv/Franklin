@@ -239,6 +239,11 @@ SIMPLEUI_CONFIG = {
                             'icon': 'fa fa-industry',
                             'url': '/admin/portfolio/portfolioproject/'
                         },
+                        {
+                            'name': 'Изображения проектов',
+                            'icon': 'fa fa-image',
+                            'url': '/admin/portfolio/portfolioimage/'
+                        },
                     ]
                 },
                 {
