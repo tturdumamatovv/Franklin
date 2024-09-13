@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 
@@ -67,13 +67,15 @@ class PortfolioProject(models.Model):
         if not self.slug:
             base_slug = slugify(unidecode(self.title))
             unique_slug = base_slug
-            counter = 1
+            counter = 0
 
-            while PortfolioDuration.objects.filter(slug=unique_slug).exists():
-                unique_slug = f"{base_slug}-{counter}"
-                counter += 1
+            # Запираем доступ к таблице для избежания гонки условий
+            with transaction.atomic():
+                while PortfolioDuration.objects.filter(slug=unique_slug).exists():
+                    counter += 1
+                    unique_slug = f"{base_slug}-{counter}"
 
-            self.slug = unique_slug
+                self.slug = unique_slug
 
         super().save(*args, **kwargs)
 
