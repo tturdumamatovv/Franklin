@@ -90,6 +90,7 @@ class PortfolioProject(models.Model):
 class PortfolioImage(models.Model):
     project = models.ForeignKey(PortfolioProject, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='portfolio_projects/', verbose_name=_("Изображение"))
+    order = models.IntegerField(default=0, verbose_name=_('Порядок'), blank=True, null=True)
 
     def __str__(self):
         return f"Изображение для - {self.project.title}"
@@ -97,3 +98,5 @@ class PortfolioImage(models.Model):
     class Meta:
         verbose_name = _('Изображения портфолио')
         verbose_name_plural = _('Изображении портфолио')
+        ordering = ['order']
+

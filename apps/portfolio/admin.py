@@ -53,4 +53,6 @@ class PortfolioProjectAdmin(SortableAdminMixin, BaseAdmin):
     list_filter = ("duration",)
     inlines = [PortfolioImageInline, ]
 
-
+@admin.register(PortfolioImage)
+class PortfolioImageAdmin(SortableAdminMixin, BaseAdmin):
+    list_filter = ("project",)
