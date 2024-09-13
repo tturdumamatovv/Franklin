@@ -4,7 +4,7 @@ from django.contrib import admin, messages
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, transaction
 from django.utils.safestring import mark_safe
-
+from django.utils.html import format_html
 from .models import PortfolioPage, PortfolioDuration, PortfolioProject, PortfolioImage
 
 
@@ -75,4 +75,11 @@ class PortfolioProjectAdmin(SortableAdminMixin, BaseAdmin):
 
 @admin.register(PortfolioImage)
 class PortfolioImageAdmin(SortableAdminMixin, BaseAdmin):
-    list_filter = ("project",)
+    list_display = ('thumbnail', 'project', 'order')  # Добавляем 'thumbnail' в список отображаемых полей
+    list_filter = ('project',)
+
+    def thumbnail(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="width: 50px; height: auto;" />', obj.image.url)
+        return "Нет изображения"
+    thumbnail.short_description = "Миниатюра"
